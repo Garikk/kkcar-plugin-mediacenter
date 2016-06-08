@@ -13,6 +13,15 @@ import java.util.HashMap;
  */
 public class PlayList {
 
+    public class PlayListEntry {
+
+        String Title;
+        String SourceAddr;
+        
+        String OnlineTrackInfoArtist;
+        String OnlineTrackInfoDescription;
+    }
+
     public enum MediaSourceType {
         INTERNET_RADIO,
         FILESYSTEM_PLAYER,
@@ -20,7 +29,7 @@ public class PlayList {
         BLUETOOTH
     }
     MediaSourceType MediaType;
-    
+
     HashMap PlayListEntry;
-    
+
 }

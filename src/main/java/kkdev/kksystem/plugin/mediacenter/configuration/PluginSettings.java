@@ -27,12 +27,12 @@ public abstract class PluginSettings {
         
         
        // System.out.println("[BT][CONFIG] Load configuration");
-        MainConfiguration=(MediaCenterConf)Settings.LoadConfig();
+        MainConfiguration=(MediaCenterConf)Settings.loadConfig();
 
         if (MainConfiguration == null) {
             System.out.println("[MDC][CONFIG] Error Load configuration, try create default config");
-            Settings.SaveConfig(kk_DefaultConfig.MakeDefaultConfig());
-            MainConfiguration=(MediaCenterConf)Settings.LoadConfig();
+            Settings.saveConfig(kk_DefaultConfig.MakeDefaultConfig());
+            MainConfiguration=(MediaCenterConf)Settings.loadConfig();
         }
         if (MainConfiguration == null) {
             System.out.println("[MDC][CONFIG] Load configuration, fatal");

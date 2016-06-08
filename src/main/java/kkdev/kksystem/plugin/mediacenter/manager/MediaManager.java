@@ -19,11 +19,11 @@ import kkdev.kksystem.plugin.mediacenter.KKPlugin;
  * @author blinov_is
  */
 public class MediaManager extends PluginManagerBase {
-    public final String GEO_TAG="GEODATA";
+    public static final String GEO_TAG="GEODATA";
    
     public void Init(KKPlugin BaseConnector)
     {
-        Connector=BaseConnector;
+        connector=BaseConnector;
     }
     
     public void ReceivePIN(PluginMessage PM)
@@ -33,15 +33,15 @@ public class MediaManager extends PluginManagerBase {
         
         PinBaseDataTaggedObj Dat=(PinBaseDataTaggedObj)PM.PinData;
         //===
-        if (!Dat.Tag.equals(GEO_TAG))
+        if (!Dat.tag.equals(GEO_TAG))
             return;
-        if (Dat.DataType!=PinBaseData.BASE_DATA_TYPE.TAGGED_OBJ)
+        if (Dat.dataType!=PinBaseData.BASE_DATA_TYPE.TAGGED_OBJ)
             return;
         //===
         
        PinGeoData PBG=new  PinGeoData();
        
-       PBG.FillNMEAData((String)Dat.Value);
+       PBG.FillNMEAData((String)Dat.value);
         
        this.BASE_SendPluginMessage(SystemConsts.KK_BASE_FEATURES_SYSTEM_MULTIFEATURE_UID, PluginConsts.KK_PLUGIN_BASE_GEO_DATA, PBG);
     }

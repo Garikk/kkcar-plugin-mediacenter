@@ -5,13 +5,16 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
+import kkdev.kksystem.plugin.mediacenter.configuration.PlayList.MediaSourceType;
+
 /**
  *
  * @author blinov_is
  */
 public class MediaCenterConf {
    public PlayList[] PlayLists;
+   public MediaSourceType[] ActivePlayers;
+   public ControlCommands CommandsAssigment;
    
-   
-    
+   public MediaSourceType ActivePlayer;
 }

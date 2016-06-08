@@ -15,7 +15,8 @@ import static kkdev.kksystem.base.constants.SystemConsts.*;
  *
  * Creating default config
  *
- * RaspberryPI_B and MIELT Display
+ * Default configuration for mediacenter
+ * MUST BE CHANGED IN PRODUCTION
  *
  */
 public abstract class kk_DefaultConfig {

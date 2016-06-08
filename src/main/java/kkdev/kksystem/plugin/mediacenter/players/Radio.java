@@ -11,7 +11,7 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
  *
  * @author blinov_is
  */
-public class InternetRadio implements IPlayer{
+public class Radio implements IPlayer{
 
     @Override
     public void play() {
