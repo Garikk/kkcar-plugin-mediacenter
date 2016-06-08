@@ -12,9 +12,18 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList.MediaSourceType;
  * @author blinov_is
  */
 public class MediaCenterConf {
+    public enum MediaProcessor
+    {
+        INTERNET_RADIO,
+        FILESYSTEMP_PLAYER,
+        RADIO,
+        BLUETOOTH
+    }
+    
+    
    public PlayList[] PlayLists;
-   public MediaSourceType[] ActivePlayers;
+   public MediaProcessor[] ActiveProcessors;
    public ControlCommands CommandsAssigment;
    
-   public MediaSourceType ActivePlayer;
+   public MediaProcessor ActivePlayer;
 }

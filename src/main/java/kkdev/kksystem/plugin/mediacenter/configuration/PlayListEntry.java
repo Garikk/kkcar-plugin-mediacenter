@@ -5,23 +5,15 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
-import java.util.HashMap;
-
 /**
  *
  * @author blinov_is
  */
-public class PlayList {
+    public class PlayListEntry {
 
-
-    public enum MediaSourceType {
-        INTERNET_RADIO,
-        FILESYSTEM_PLAYER,
-        RADIO,
-        BLUETOOTH
+        String Title;
+        String SourceAddr;
+        
+        String OnlineTrackInfoArtist;
+        String OnlineTrackInfoDescription;
     }
-    MediaSourceType MediaType;
-
-    HashMap PlayListEntry;
-
-}

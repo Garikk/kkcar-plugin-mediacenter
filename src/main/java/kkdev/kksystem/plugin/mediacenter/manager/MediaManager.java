@@ -5,22 +5,20 @@
  */
 package kkdev.kksystem.plugin.mediacenter.manager;
 
-import kkdev.kksystem.base.classes.base.PinBaseData;
-import kkdev.kksystem.base.classes.base.PinBaseDataTaggedObj;
-import kkdev.kksystem.base.classes.geo.PinGeoData;
+import kkdev.kksystem.base.classes.controls.PinControlData;
 import kkdev.kksystem.base.classes.plugins.PluginMessage;
 import kkdev.kksystem.base.classes.plugins.simple.managers.PluginManagerBase;
-import kkdev.kksystem.base.constants.PluginConsts;
-import kkdev.kksystem.base.constants.SystemConsts;
+import static kkdev.kksystem.base.constants.PluginConsts.KK_PLUGIN_BASE_CONTROL_DATA;
 import kkdev.kksystem.plugin.mediacenter.KKPlugin;
+import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
 
 /**
  *
  * @author blinov_is
  */
 public class MediaManager extends PluginManagerBase {
-    public static final String GEO_TAG="GEODATA";
-   
+   private MediaProcessor CurrentMediaProcessor;
+    
     public void Init(KKPlugin BaseConnector)
     {
         connector=BaseConnector;
@@ -28,21 +26,18 @@ public class MediaManager extends PluginManagerBase {
     
     public void ReceivePIN(PluginMessage PM)
     {
-        if (!PM.PinName.equals(PluginConsts.KK_PLUGIN_BASE_BASIC_TAGGEDOBJ_DATA))
-            return;
-        
-        PinBaseDataTaggedObj Dat=(PinBaseDataTaggedObj)PM.PinData;
-        //===
-        if (!Dat.tag.equals(GEO_TAG))
-            return;
-        if (Dat.dataType!=PinBaseData.BASE_DATA_TYPE.TAGGED_OBJ)
-            return;
-        //===
-        
-       PinGeoData PBG=new  PinGeoData();
-       
-       PBG.FillNMEAData((String)Dat.value);
-        
-       this.BASE_SendPluginMessage(SystemConsts.KK_BASE_FEATURES_SYSTEM_MULTIFEATURE_UID, PluginConsts.KK_PLUGIN_BASE_GEO_DATA, PBG);
+       switch (PM.PinName)
+       {
+           case KK_PLUGIN_BASE_CONTROL_DATA:
+               processControlCommand((PinControlData)PM.PinData);
+               break;
+           
+       }
+    }
+    
+    
+    private void processControlCommand(PinControlData PC)
+    {
+    
     }
 }

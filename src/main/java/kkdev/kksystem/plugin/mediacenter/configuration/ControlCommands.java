@@ -24,7 +24,19 @@ public class ControlCommands {
         CMD_VOLDOWN,
         CMD_MUTE,
         CMD_SHUFFLEMODE,
-        CMD_REPEATMODE
+        CMD_REPEATMODE,
+        CMD_PRESET_1,
+        CMD_PRESET_2,
+        CMD_PRESET_3,
+        CMD_PRESET_4,
+        CMD_PRESET_5,
+        CMD_PRESET_6,
+        CMD_PRESET_7,
+        CMD_PRESET_8,
+        CMD_PRESET_9,
+        CMD_PRESET_10
+        
+        
     }
     
     public Map<ControlCommandTypes,String> controlsAssigment;

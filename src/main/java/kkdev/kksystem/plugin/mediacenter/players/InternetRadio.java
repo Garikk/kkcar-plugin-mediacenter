@@ -5,17 +5,36 @@
  */
 package kkdev.kksystem.plugin.mediacenter.players;
 
+import java.util.ArrayList;
+import java.util.List;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 /**
  *
  * @author blinov_is
  */
-public class InternetRadio implements IPlayer{
+public class InternetRadio implements IPlayer {
+
+    final List<String> vlcArgs = new ArrayList<>();
+    final EmbeddedMediaPlayer mediaPlayer = createPlayer(vlcArgs);
+
+    private EmbeddedMediaPlayer createPlayer(final List<String> vlcArgs) {
+        EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+        EmbeddedMediaPlayer embeddedMediaPlayer = mediaPlayerComponent.getMediaPlayer();
+
+        MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(vlcArgs.toArray(new String[vlcArgs.size()]));
+        mediaPlayerFactory.setUserAgent("vlcj test player");
+        embeddedMediaPlayer.setPlaySubItems(true);
+
+        return embeddedMediaPlayer;
+    }
 
     @Override
     public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mediaPlayer.playMedia("http://air.radiorecord.ru/rr_128");
     }
 
     @Override
@@ -25,47 +44,47 @@ public class InternetRadio implements IPlayer{
 
     @Override
     public void stop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mediaPlayer.stop();
     }
 
     @Override
     public void pause() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mediaPlayer.pause();
     }
 
     @Override
     public void resume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       mediaPlayer.release();
     }
 
     @Override
     public void seekForward() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       //
     }
 
     @Override
     public void seekBackward() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      //
     }
 
     @Override
     public void stepNext() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //
     }
 
     @Override
     public void stepBack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //
     }
 
     @Override
     public void shuffle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      //
     }
 
     @Override
     public void setPlayList(PlayList[] PList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     //
     }
-    
+
 }
