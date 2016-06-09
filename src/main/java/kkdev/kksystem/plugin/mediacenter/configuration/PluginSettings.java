@@ -14,27 +14,27 @@ import kkdev.kksystem.base.classes.plugins.simple.SettingsManager;
 public abstract class PluginSettings {
 
    public static  String RS_CONF;
-   private static SettingsManager Settings;
+   private static SettingsManager settings;
 
-   public String FeatureID;
+   public String featureID;
    
-    public static MediaCenterConf MainConfiguration;
+    public static MediaCenterConf mainConfiguration;
 
-    public static void InitConfig(String GlobalConfigUID, String MyUID) {
+    public static void initConfig(String GlobalConfigUID, String MyUID) {
          RS_CONF=GlobalConfigUID+"_"+MyUID + ".json";
         
-        Settings=new SettingsManager(RS_CONF,MediaCenterConf.class);
+        settings=new SettingsManager(RS_CONF,MediaCenterConf.class);
         
         
        // System.out.println("[BT][CONFIG] Load configuration");
-        MainConfiguration=(MediaCenterConf)Settings.loadConfig();
+        mainConfiguration=(MediaCenterConf)settings.loadConfig();
 
-        if (MainConfiguration == null) {
+        if (mainConfiguration == null) {
             System.out.println("[MDC][CONFIG] Error Load configuration, try create default config");
-            Settings.saveConfig(kk_DefaultConfig.MakeDefaultConfig());
-            MainConfiguration=(MediaCenterConf)Settings.loadConfig();
+            settings.saveConfig(kk_DefaultConfig.MakeDefaultConfig());
+            mainConfiguration=(MediaCenterConf)settings.loadConfig();
         }
-        if (MainConfiguration == null) {
+        if (mainConfiguration == null) {
             System.out.println("[MDC][CONFIG] Load configuration, fatal");
             return;
         }

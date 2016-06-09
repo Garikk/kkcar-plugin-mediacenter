@@ -6,6 +6,12 @@
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
 import java.util.HashMap;
+import kkdev.kksystem.base.classes.display.pages.DisplayPage;
+import kkdev.kksystem.base.classes.display.pages.UIFrameData;
+import kkdev.kksystem.base.classes.display.pages.UIFramePack;
+import kkdev.kksystem.base.constants.SystemConsts;
+import static kkdev.kksystem.base.constants.SystemConsts.KK_BASE_UICONTEXT_DEFAULT;
+import kkdev.kksystem.base.interfaces.IKKControllerUtils;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
 
 
@@ -45,24 +51,64 @@ public abstract class kk_DefaultConfig {
      CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_5, "CUSTOM_CHR_TRK_5");
      
      
-     DefConf.CommandsAssigment=CCmd;
-     DefConf.ActivePlayer=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
-     DefConf.ActiveProcessors=new MediaProcessor[1];
-     DefConf.ActiveProcessors[0]=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
+     DefConf.commandsAssigment=CCmd;
+     DefConf.activePlayer=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
+     DefConf.activeProcessors=new MediaProcessor[1];
+     DefConf.activeProcessors[0]=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
      
-     DefConf.PlayLists=new PlayList[2];
+     DefConf.playLists=new PlayList[2];
      PlayList PL = new PlayList();
-     PL.PlayListEntry=new HashMap<>();
-     PL.MediaType=PlayList.MediaSourceType.INTERNET_RADIO;
+     PL.playListEntry=new HashMap<>();
+     PL.mediaType=PlayList.MediaSourceType.INTERNET_RADIO;
   
      PlayListEntry PLE=new PlayListEntry();
      PLE.Title="Radio Record";
      PLE.SourceAddr="http://air.radiorecord.ru/rr_128";
      
-     PL.PlayListEntry.put("Record", PLE);
+     PL.playListEntry.put("Record", PLE);
      
              
         
        return DefConf;
     }
+    
+    public static void addDefaultSystemUIPages(IKKControllerUtils Utils) {
+        DisplayPage DP;
+        UIFramePack[] FramePack;
+        //
+        FramePack = getFramePack();
+        //
+        DP = new DisplayPage();
+        DP.dynamicElements = true;
+        DP.features = new String[1];
+        DP.features[0] = SystemConsts.KK_BASE_FEATURES_MEDIAPLAYER_UID;
+        DP.contexts = new String[1];
+        DP.contexts[0] = SystemConsts.KK_BASE_UICONTEXT_DEFAULT;
+        DP.pageName = "MEDIAPLAYER";
+        DP.isDefaultPage = false;
+        DP.isMultifeaturePage = true;
+        DP.framesPack = FramePack[0];
+        //
+        Utils.DISPLAY_AddUIDisplayPage(DP);
+        //
+      
+
+    }
+
+    private static UIFramePack[] getFramePack() {
+        UIFramePack[] Ret = new UIFramePack[1];
+        Ret[0] = new UIFramePack();
+        Ret[0].name = "Diag display pages";
+        Ret[0].packID = "";
+        Ret[0].data = new UIFrameData[4];
+        Ret[0].data[0] = new UIFrameData();
+
+        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n\r\n[MP_TRACKTIME]";
+        Ret[0].data[0].fontSize = 2;
+        
+        //
+        return Ret;
+
+    }
+
 }

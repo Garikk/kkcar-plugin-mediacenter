@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.headless.DefaultHeadlessMediaPlayer;
+import uk.co.caprica.vlcj.player.headless.HeadlessMediaPlayer;
 
 /**
  *
@@ -18,18 +21,15 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  */
 public class InternetRadio implements IPlayer {
 
-    final List<String> vlcArgs = new ArrayList<>();
-    final EmbeddedMediaPlayer mediaPlayer = createPlayer(vlcArgs);
+    final HeadlessMediaPlayer mediaPlayer = createPlayer();
 
-    private EmbeddedMediaPlayer createPlayer(final List<String> vlcArgs) {
-        EmbeddedMediaPlayerComponent mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
-        EmbeddedMediaPlayer embeddedMediaPlayer = mediaPlayerComponent.getMediaPlayer();
-
-        MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(vlcArgs.toArray(new String[vlcArgs.size()]));
-        mediaPlayerFactory.setUserAgent("vlcj test player");
-        embeddedMediaPlayer.setPlaySubItems(true);
-
-        return embeddedMediaPlayer;
+    private HeadlessMediaPlayer createPlayer( ) {
+        HeadlessMediaPlayer headlessMediaPlayer;
+        MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
+        headlessMediaPlayer=mediaPlayerFactory.newHeadlessMediaPlayer();
+        
+        
+        return headlessMediaPlayer;
     }
 
     @Override

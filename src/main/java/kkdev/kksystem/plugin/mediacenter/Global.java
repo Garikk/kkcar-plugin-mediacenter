@@ -13,6 +13,6 @@ import kkdev.kksystem.plugin.mediacenter.manager.MediaManager;
  *
  * @author blinov_is
  */
-public abstract class Global {
-    protected static MediaManager MD;
+public class Global {
+    public static MediaManager MD;
 }

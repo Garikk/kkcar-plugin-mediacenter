@@ -20,8 +20,8 @@ public class PlayList {
         RADIO,
         BLUETOOTH
     }
-    MediaSourceType MediaType;
+    MediaSourceType mediaType;
 
-    HashMap PlayListEntry;
+    HashMap playListEntry;
 
 }

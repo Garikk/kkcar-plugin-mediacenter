@@ -5,7 +5,7 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
-import kkdev.kksystem.plugin.mediacenter.configuration.PlayList.MediaSourceType;
+import kkdev.kksystem.base.constants.SystemConsts;
 
 /**
  *
@@ -21,9 +21,11 @@ public class MediaCenterConf {
     }
     
     
-   public PlayList[] PlayLists;
-   public MediaProcessor[] ActiveProcessors;
-   public ControlCommands CommandsAssigment;
+   public PlayList[] playLists;
+   public MediaProcessor[] activeProcessors;
+   public ControlCommands commandsAssigment;
    
-   public MediaProcessor ActivePlayer;
+   public MediaProcessor activePlayer;
+   
+   public String featureID=SystemConsts.KK_BASE_FEATURES_MEDIAPLAYER_UID;
 }

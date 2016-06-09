@@ -32,7 +32,7 @@ public class MediaPluginInfo implements IPluginInfoRequest {
 
     private String[] GetMyReceivePinInfo() {
 
-        String[] ret = new String[2];
+        String[] ret = new String[3];
 
         ret[0] = PluginConsts.KK_PLUGIN_BASE_PIN_COMMAND;
         ret[1] = PluginConsts.KK_PLUGIN_BASE_CONTROL_DATA;
