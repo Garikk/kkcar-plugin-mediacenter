@@ -67,5 +67,10 @@ public class Bluetooth implements IPlayer {
     public void setPlayList(PlayList[] PList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public PlayerInfo getPlayerInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

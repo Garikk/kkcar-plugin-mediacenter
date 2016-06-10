@@ -7,6 +7,8 @@ package kkdev.kksystem.plugin.mediacenter.manager;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kkdev.kksystem.base.classes.controls.PinControlData;
 import kkdev.kksystem.base.classes.plugins.PluginMessage;
 import kkdev.kksystem.base.classes.plugins.simple.managers.PluginManagerBase;
@@ -35,18 +37,18 @@ public class MediaManager extends PluginManagerBase {
     public void init(KKPlugin BaseConnector) {
         connector = BaseConnector;
         PluginSettings.initConfig(BaseConnector.globalConfID, BaseConnector.pluginInfo.getPluginInfo().PluginUUID);
-        this.currentFeature.put(SystemConsts.KK_BASE_UICONTEXT_DEFAULT,PluginSettings.mainConfiguration.featureID);
+        this.currentFeature.put(SystemConsts.KK_BASE_UICONTEXT_DEFAULT, PluginSettings.mainConfiguration.featureID);
         Players = new HashMap<>();
-        MDisplay=new MediaDisplay(BaseConnector.GetUtils(),connector);
+        MDisplay = new MediaDisplay(BaseConnector.GetUtils(), connector);
         initProcessors();
     }
 
-    public void start()
-    {
+    public void start() {
         MDisplay.showMediaDisplay();
+        UpdateDisplay.start();
         //Players.get(CurrentMediaProcessor).play();
     }
-    
+
     private void initProcessors() {
         CurrentMediaProcessor = PluginSettings.mainConfiguration.activePlayer;
         for (MediaProcessor MP : PluginSettings.mainConfiguration.activeProcessors) {
@@ -73,6 +75,25 @@ public class MediaManager extends PluginManagerBase {
                 processControlCommand((PinControlData) PM.PinData);
                 break;
         }
+    }
+    Thread UpdateDisplay = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            IPlayer CheckPlayer;
+            while (true) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MediaManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                CheckPlayer = Players.get(CurrentMediaProcessor);
+                MDisplay.updateCurrentDisplayInfo(CheckPlayer.getPlayerInfo());
+
+            }
+        }
+    });
+
+    private void activatePlayer() {
     }
 
     private void processControlCommand(PinControlData PC) {

@@ -13,6 +13,7 @@ import kkdev.kksystem.base.constants.SystemConsts;
 import static kkdev.kksystem.base.constants.SystemConsts.KK_BASE_UICONTEXT_DEFAULT;
 import kkdev.kksystem.base.interfaces.IKKControllerUtils;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
+import static kkdev.kksystem.plugin.mediacenter.manager.mediadisplay.MediaDisplay.MEDIACENTER_PAGE;
 
 
 /**
@@ -84,7 +85,7 @@ public abstract class kk_DefaultConfig {
         DP.features[0] = SystemConsts.KK_BASE_FEATURES_MEDIAPLAYER_UID;
         DP.contexts = new String[1];
         DP.contexts[0] = SystemConsts.KK_BASE_UICONTEXT_DEFAULT;
-        DP.pageName = "MEDIAPLAYER";
+        DP.pageName = MEDIACENTER_PAGE;
         DP.isDefaultPage = false;
         DP.isMultifeaturePage = true;
         DP.framesPack = FramePack[0];
@@ -100,7 +101,7 @@ public abstract class kk_DefaultConfig {
         Ret[0] = new UIFramePack();
         Ret[0].name = "Diag display pages";
         Ret[0].packID = "";
-        Ret[0].data = new UIFrameData[4];
+        Ret[0].data = new UIFrameData[1];
         Ret[0].data[0] = new UIFrameData();
 
         Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n\r\n[MP_TRACKTIME]";

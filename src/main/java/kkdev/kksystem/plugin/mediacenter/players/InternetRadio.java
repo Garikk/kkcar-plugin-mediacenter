@@ -5,14 +5,8 @@
  */
 package kkdev.kksystem.plugin.mediacenter.players;
 
-import java.util.ArrayList;
-import java.util.List;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.headless.DefaultHeadlessMediaPlayer;
 import uk.co.caprica.vlcj.player.headless.HeadlessMediaPlayer;
 
 /**
@@ -20,7 +14,8 @@ import uk.co.caprica.vlcj.player.headless.HeadlessMediaPlayer;
  * @author blinov_is
  */
 public class InternetRadio implements IPlayer {
-
+    private PlayerInfo currentTrack;
+    
     final HeadlessMediaPlayer mediaPlayer = createPlayer();
 
     private HeadlessMediaPlayer createPlayer( ) {
@@ -28,7 +23,11 @@ public class InternetRadio implements IPlayer {
         MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
         headlessMediaPlayer=mediaPlayerFactory.newHeadlessMediaPlayer();
         
-        
+        currentTrack=new PlayerInfo();
+        currentTrack.PlayerName="Internet Radio";
+        currentTrack.TitleArtist="===";
+        currentTrack.TitleDescription="===";
+        currentTrack.TrackTimeLine="===";
         return headlessMediaPlayer;
     }
 
@@ -85,6 +84,11 @@ public class InternetRadio implements IPlayer {
     @Override
     public void setPlayList(PlayList[] PList) {
      //
+    }
+
+    @Override
+    public PlayerInfo getPlayerInfo() {
+        return currentTrack;
     }
 
 }

@@ -24,4 +24,7 @@ public interface IPlayer {
     void shuffle();
     
     void setPlayList(PlayList[] PList);
+    
+    PlayerInfo getPlayerInfo();
+    
 }

@@ -14,6 +14,7 @@ import kkdev.kksystem.base.interfaces.IKKControllerUtils;
 import kkdev.kksystem.base.interfaces.IPluginKKConnector;
 import kkdev.kksystem.plugin.mediacenter.Global;
 import kkdev.kksystem.plugin.mediacenter.configuration.kk_DefaultConfig;
+import kkdev.kksystem.plugin.mediacenter.players.PlayerInfo;
 
 /**
  *
@@ -21,11 +22,17 @@ import kkdev.kksystem.plugin.mediacenter.configuration.kk_DefaultConfig;
  */
 public class MediaDisplay {
 
+    public final static String MEDIACENTER_PAGE = "MEDIAPLAYER";
     PageMaker pageManager;
     framesKeySet CurrentDisplayInfo;
 
     public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector) {
         kk_DefaultConfig.addDefaultSystemUIPages(Utils);
+        CurrentDisplayInfo = new framesKeySet();
+        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", "Dingo Media");
+        CurrentDisplayInfo.setValue("[MP_TRACKTITLE]", "Loading");
+        CurrentDisplayInfo.setValue("[MP_TRACKTITLE_2]", "Wait");
+        CurrentDisplayInfo.setValue("[MP_TRACKTIME]", "Wait");
     }
 
     IPageMakerExecCommand PageExec = new IPageMakerExecCommand() {
@@ -45,20 +52,24 @@ public class MediaDisplay {
         MKPageItem[] Page;
         Page = new MKPageItem[1];
         Page[0] = new MKPageItem();
-        Page[0].pageName = "MEDIAPLAYER";
+        Page[0].pageName = MEDIACENTER_PAGE;
         Page[0].pageCommand = "PLAYER STOPSTART";
         Page[0].pageFrames = CurrentDisplayInfo;
         pageManager.addPages(Page);
         pageManager.showInfoPage();
     }
 
-    private void updateCurrentDisplayInfo(String TrackInfo, String TrackInfo2, String TrackTime) {
-        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", "TEST");
+    public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime) {
+        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", PlayerName);
         CurrentDisplayInfo.setValue("[MP_TRACKTITLE]", TrackInfo);
         CurrentDisplayInfo.setValue("[MP_TRACKTITLE_2]", TrackInfo2);
         CurrentDisplayInfo.setValue("[MP_TRACKTIME]", TrackTime);
         //
-        pageManager.updatePageFrames("MEDIAPLAYER", CurrentDisplayInfo);
+        pageManager.updatePageFrames(MEDIACENTER_PAGE, CurrentDisplayInfo);
     }
+     public void updateCurrentDisplayInfo(PlayerInfo Info) {
+        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine);
+    }
+   
 
 }
