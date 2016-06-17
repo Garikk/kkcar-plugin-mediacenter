@@ -82,7 +82,7 @@ public class MediaManager extends PluginManagerBase {
             IPlayer CheckPlayer;
             while (true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MediaManager.class.getName()).log(Level.SEVERE, null, ex);
                 }

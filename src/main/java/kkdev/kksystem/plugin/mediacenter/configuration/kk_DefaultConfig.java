@@ -80,7 +80,7 @@ public abstract class kk_DefaultConfig {
         FramePack = getFramePack();
         //
         DP = new DisplayPage();
-        DP.dynamicElements = true;
+        DP.dynamicElements = false;
         DP.features = new String[1];
         DP.features[0] = SystemConsts.KK_BASE_FEATURES_MEDIAPLAYER_UID;
         DP.contexts = new String[1];

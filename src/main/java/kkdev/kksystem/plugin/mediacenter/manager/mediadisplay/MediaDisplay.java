@@ -60,10 +60,10 @@ public class MediaDisplay {
     }
 
     public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime) {
-        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", PlayerName);
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE]", TrackInfo);
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE_2]", TrackInfo2);
-        CurrentDisplayInfo.setValue("[MP_TRACKTIME]", TrackTime);
+        CurrentDisplayInfo.setValue("MP_PLAYERTYPE", PlayerName);
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE", TrackInfo);
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE_2", TrackInfo2);
+        CurrentDisplayInfo.setValue("MP_TRACKTIME", TrackTime);
         //
         pageManager.updatePageFrames(MEDIACENTER_PAGE, CurrentDisplayInfo);
     }
