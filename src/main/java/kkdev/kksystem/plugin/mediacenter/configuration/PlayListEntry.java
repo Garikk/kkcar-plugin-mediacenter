@@ -11,9 +11,9 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
  */
     public class PlayListEntry {
 
-        String Title;
-        String SourceAddr;
+       public String Title;
+       public String SourceAddr;
         
-        String OnlineTrackInfoArtist;
-        String OnlineTrackInfoDescription;
+       public String OnlineTrackInfoArtist;
+       public String OnlineTrackInfoDescription;
     }

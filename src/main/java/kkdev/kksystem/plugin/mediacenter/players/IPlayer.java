@@ -23,7 +23,10 @@ public interface IPlayer {
     void stepBack();
     void shuffle();
     
-    void setPlayList(PlayList[] PList);
+    void setPlayList(PlayList PList);
+    
+    void increaseVolume(int Step);
+    void decreaseVolime(int Step);
     
     PlayerInfo getPlayerInfo();
     

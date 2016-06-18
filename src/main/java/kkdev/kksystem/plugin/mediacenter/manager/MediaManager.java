@@ -16,6 +16,7 @@ import static kkdev.kksystem.base.constants.PluginConsts.KK_PLUGIN_BASE_CONTROL_
 import kkdev.kksystem.base.constants.SystemConsts;
 import kkdev.kksystem.plugin.mediacenter.KKPlugin;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
+import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PluginSettings;
 import kkdev.kksystem.plugin.mediacenter.manager.mediadisplay.MediaDisplay;
 import kkdev.kksystem.plugin.mediacenter.players.Bluetooth;
@@ -46,7 +47,7 @@ public class MediaManager extends PluginManagerBase {
     public void start() {
         MDisplay.showMediaDisplay();
         UpdateDisplay.start();
-        //Players.get(CurrentMediaProcessor).play();
+        Players.get(CurrentMediaProcessor).play();
     }
 
     private void initProcessors() {
@@ -82,7 +83,7 @@ public class MediaManager extends PluginManagerBase {
             IPlayer CheckPlayer;
             while (true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(900);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MediaManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -93,10 +94,25 @@ public class MediaManager extends PluginManagerBase {
         }
     });
 
+    private void setPlaylist(IPlayer Player, PlayList PL)
+    {
+        Player.setPlayList(PL);
+    }
     private void activatePlayer() {
     }
 
     private void processControlCommand(PinControlData PC) {
+        for (String Ctl : PC.controlID) {
+            if (Ctl.equals("CUSTOM_CHRY_TUNE_FF")) {
+                Players.get(CurrentMediaProcessor).increaseVolume(5);
+            } else if (Ctl.equals("CUSTOM_CHRY_TUNE_RW")) {
+                Players.get(CurrentMediaProcessor).decreaseVolime(5);
+            } else if (Ctl.equals("CUSTOM_CHRY_SEEK_UP")) {
+                Players.get(CurrentMediaProcessor).stepNext();
+            } else if (Ctl.equals("CUSTOM_CHRY_SEEK_DOWN")) {
+                Players.get(CurrentMediaProcessor).stepBack();
+            }
+        }
 
     }
 }

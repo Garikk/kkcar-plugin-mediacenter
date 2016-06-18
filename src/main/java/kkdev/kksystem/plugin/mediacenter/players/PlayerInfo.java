@@ -14,4 +14,6 @@ public class PlayerInfo {
     public String TitleArtist;
     public String TitleDescription;
     public String TrackTimeLine;
+    
+    public int CurrentVolumeLevel;
 }

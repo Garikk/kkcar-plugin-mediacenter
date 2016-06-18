@@ -5,7 +5,7 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +13,7 @@ import java.util.HashMap;
  */
 public class PlayList {
 
+    private int CurrentPosition;
 
     public enum MediaSourceType {
         INTERNET_RADIO,
@@ -22,6 +23,37 @@ public class PlayList {
     }
     MediaSourceType mediaType;
 
-    HashMap playListEntry;
+    ArrayList<PlayListEntry> playListEntrys;
 
+    public PlayList() {
+        playListEntrys = new ArrayList<>();
+        CurrentPosition = 0;
+    }
+
+    public void addTrack(PlayListEntry PLE) {
+        playListEntrys.add(PLE);
+    }
+
+    public PlayListEntry getTrack() {
+        if (playListEntrys.size() == CurrentPosition) {
+            CurrentPosition = 0;
+        } else {
+            CurrentPosition++;
+        }
+        return playListEntrys.get(CurrentPosition);
+
+    }
+
+    public PlayListEntry getTrack(int position) {
+
+        if (playListEntrys.size() < CurrentPosition) {
+            CurrentPosition = playListEntrys.size();
+        } else {
+            CurrentPosition = position;
+        }
+
+        return playListEntrys.get(CurrentPosition);
+
+
+    }
 }

@@ -59,16 +59,17 @@ public class MediaDisplay {
         pageManager.showInfoPage();
     }
 
-    public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime) {
-        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", PlayerName);
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE]", TrackInfo);
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE_2]", TrackInfo2);
-        CurrentDisplayInfo.setValue("[MP_TRACKTIME]", TrackTime);
+    public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime, Integer VolumeLevel) {
+        CurrentDisplayInfo.setValue("MP_PLAYERTYPE", PlayerName);
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE", TrackInfo);
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE_2", TrackInfo2);
+        CurrentDisplayInfo.setValue("MP_TRACKTIME", TrackTime);
+        CurrentDisplayInfo.setValue("VOL_LEVEL", VolumeLevel.toString());
         //
         pageManager.updatePageFrames(MEDIACENTER_PAGE, CurrentDisplayInfo);
     }
      public void updateCurrentDisplayInfo(PlayerInfo Info) {
-        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine);
+        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel);
     }
    
 

@@ -64,12 +64,22 @@ public class Radio implements IPlayer{
     }
 
     @Override
-    public void setPlayList(PlayList[] PList) {
+    public void setPlayList(PlayList PList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public PlayerInfo getPlayerInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void increaseVolume(int Step) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void decreaseVolime(int Step) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

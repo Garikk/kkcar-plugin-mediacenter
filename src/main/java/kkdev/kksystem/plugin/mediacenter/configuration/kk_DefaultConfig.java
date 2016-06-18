@@ -5,6 +5,7 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import kkdev.kksystem.base.classes.display.pages.DisplayPage;
 import kkdev.kksystem.base.classes.display.pages.UIFrameData;
@@ -59,14 +60,17 @@ public abstract class kk_DefaultConfig {
      
      DefConf.playLists=new PlayList[2];
      PlayList PL = new PlayList();
-     PL.playListEntry=new HashMap<>();
      PL.mediaType=PlayList.MediaSourceType.INTERNET_RADIO;
   
      PlayListEntry PLE=new PlayListEntry();
      PLE.Title="Radio Record";
      PLE.SourceAddr="http://air.radiorecord.ru/rr_128";
+     PL.addTrack(PLE);
      
-     PL.playListEntry.put("Record", PLE);
+     PLE=new PlayListEntry();
+     PLE.Title="Dance Wave";
+     PLE.SourceAddr="http://stream.dancewave.online:8080/dance.mp3";
+    PL.addTrack(PLE);
      
              
         
@@ -104,7 +108,7 @@ public abstract class kk_DefaultConfig {
         Ret[0].data = new UIFrameData[1];
         Ret[0].data[0] = new UIFrameData();
 
-        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n\r\n[MP_TRACKTIME]";
+        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n \r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n \r\n[MP_TRACKTIME]\r\n[VOL_LEVEL]";
         Ret[0].data[0].fontSize = 2;
         
         //
