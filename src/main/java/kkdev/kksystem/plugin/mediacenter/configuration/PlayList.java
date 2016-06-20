@@ -21,7 +21,7 @@ public class PlayList {
         RADIO,
         BLUETOOTH
     }
-    MediaSourceType mediaType;
+    public MediaSourceType mediaType;
 
     ArrayList<PlayListEntry> playListEntrys;
 
@@ -34,11 +34,26 @@ public class PlayList {
         playListEntrys.add(PLE);
     }
 
-    public PlayListEntry getTrack() {
+    public PlayListEntry getCurrentTrack() {
+        return playListEntrys.get(CurrentPosition);
+
+    }
+
+    public PlayListEntry getNextTrack() {
         if (playListEntrys.size() == CurrentPosition) {
             CurrentPosition = 0;
         } else {
             CurrentPosition++;
+        }
+        return playListEntrys.get(CurrentPosition);
+
+    }
+
+    public PlayListEntry getPrevTrack() {
+        if (CurrentPosition == 0) {
+            CurrentPosition = playListEntrys.size();
+        } else {
+            CurrentPosition--;
         }
         return playListEntrys.get(CurrentPosition);
 
@@ -53,7 +68,6 @@ public class PlayList {
         }
 
         return playListEntrys.get(CurrentPosition);
-
 
     }
 }

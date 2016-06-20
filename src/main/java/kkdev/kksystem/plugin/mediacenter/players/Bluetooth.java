@@ -13,10 +13,6 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
  */
 public class Bluetooth implements IPlayer {
 
-    @Override
-    public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void play(int PlayListPosition) {
@@ -49,12 +45,12 @@ public class Bluetooth implements IPlayer {
     }
 
     @Override
-    public void stepNext() {
+    public void stepNextTrack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void stepBack() {
+    public void stepBackTrack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -64,7 +60,7 @@ public class Bluetooth implements IPlayer {
     }
 
     @Override
-    public void setPlayList(PlayList PList) {
+    public void addPlayList(PlayList PList) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -80,6 +76,16 @@ public class Bluetooth implements IPlayer {
 
     @Override
     public void decreaseVolime(int Step) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void playPlayListItem(int PlayListPosition) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setActivePlayList(String PlayListID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

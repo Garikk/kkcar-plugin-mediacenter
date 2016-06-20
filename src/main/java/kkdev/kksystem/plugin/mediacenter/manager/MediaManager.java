@@ -47,7 +47,7 @@ public class MediaManager extends PluginManagerBase {
     public void start() {
         MDisplay.showMediaDisplay();
         UpdateDisplay.start();
-        Players.get(CurrentMediaProcessor).play();
+        Players.get(CurrentMediaProcessor).play(0);
     }
 
     private void initProcessors() {
@@ -68,6 +68,28 @@ public class MediaManager extends PluginManagerBase {
                     break;
             }
         }
+    }
+
+    private void initPlaylists() {
+        for (PlayList PL : PluginSettings.mainConfiguration.playLists) {
+            Players.get(getMediaProcessorForMediaType(PL.mediaType)).addPlayList(PL);
+        }
+    }
+
+    private MediaProcessor getMediaProcessorForMediaType(PlayList.MediaSourceType MST) {
+        switch (MST) {
+            case BLUETOOTH:
+                return MediaProcessor.BLUETOOTH;
+            case INTERNET_RADIO:
+                return MediaProcessor.INTERNET_RADIO;
+            case FILESYSTEM_PLAYER:
+                return MediaProcessor.FILESYSTEMP_PLAYER;
+            case RADIO:
+                return MediaProcessor.RADIO;
+        }
+        //
+        
+        return null;
     }
 
     public void receivePin(PluginMessage PM) {
@@ -96,21 +118,19 @@ public class MediaManager extends PluginManagerBase {
 
     private void setPlaylist(IPlayer Player, PlayList PL)
     {
-        Player.setPlayList(PL);
-    }
-    private void activatePlayer() {
+        Player.addPlayList(PL);
     }
 
     private void processControlCommand(PinControlData PC) {
         for (String Ctl : PC.controlID) {
-            if (Ctl.equals("CUSTOM_CHRY_TUNE_FF")) {
+            if (Ctl.equals(PinControlData.DEF_BTN_VOL_INC)) {
                 Players.get(CurrentMediaProcessor).increaseVolume(5);
-            } else if (Ctl.equals("CUSTOM_CHRY_TUNE_RW")) {
+            } else if (Ctl.equals(PinControlData.DEF_BTN_VOL_DEC)) {
                 Players.get(CurrentMediaProcessor).decreaseVolime(5);
-            } else if (Ctl.equals("CUSTOM_CHRY_SEEK_UP")) {
-                Players.get(CurrentMediaProcessor).stepNext();
-            } else if (Ctl.equals("CUSTOM_CHRY_SEEK_DOWN")) {
-                Players.get(CurrentMediaProcessor).stepBack();
+            } else if (Ctl.equals(PinControlData.DEF_BTN_NEXT_TRACK)) {
+                Players.get(CurrentMediaProcessor).stepNextTrack();
+            } else if (Ctl.equals(PinControlData.DEF_BTN_PREV_TRACK)) {
+                Players.get(CurrentMediaProcessor).stepBackTrack();
             }
         }
 

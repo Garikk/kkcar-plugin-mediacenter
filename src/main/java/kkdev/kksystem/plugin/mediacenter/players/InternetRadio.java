@@ -5,6 +5,7 @@
  */
 package kkdev.kksystem.plugin.mediacenter.players;
 
+import java.util.Map;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayListEntry;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
@@ -15,8 +16,9 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  * @author blinov_is
  */
 public class InternetRadio implements IPlayer {
-    private PlayerInfo currentTrack;
+    private PlayerInfo currentTrackInfo;
     private PlayList currentPlayList;
+    private Map<String,PlayList> PlayLists;
     
     final EmbeddedMediaPlayer  mediaPlayer = createPlayer();
     String[] VLC_ARGS = {
@@ -39,33 +41,41 @@ public class InternetRadio implements IPlayer {
     }
     
     public InternetRadio(){
-        currentTrack=new PlayerInfo();
-        currentTrack.PlayerName="Internet Radio";
-        currentTrack.TitleArtist="===";
-        currentTrack.TitleDescription="===";
-        currentTrack.TrackTimeLine="===";
+        currentTrackInfo=new PlayerInfo();
+        currentTrackInfo.PlayerName="Internet Radio";
+        currentTrackInfo.TitleArtist="===";
+        currentTrackInfo.TitleDescription="===";
+        currentTrackInfo.TrackTimeLine="===";
         
     }
     @Override
-    public void play() {
-        PlayListEntry PLE=currentPlayList.getTrack();
-        currentTrack.TitleArtist=PLE.Title;
-        currentTrack.TitleDescription=PLE.OnlineTrackInfoArtist;
-        
+    public void play(int step) {
+        if (step > 0) {
+            playPLItem(currentPlayList.getNextTrack());
+        } else if (step == 0) {
+            playPLItem(currentPlayList.getCurrentTrack());
+        } else {
+            playPLItem(currentPlayList.getPrevTrack());
+        }
+    }
+    
+    @Override
+    public void playPlayListItem(int PlayListPosition) {
+        playPLItem(currentPlayList.getTrack(PlayListPosition));
+    }
+    
+    private void playPLItem(PlayListEntry PLE) {
+        currentTrackInfo.TitleArtist = PLE.Title;
+        currentTrackInfo.TitleDescription = PLE.OnlineTrackInfoArtist;
         mediaPlayer.playMedia(PLE.SourceAddr);
-        currentTrack.CurrentVolumeLevel=mediaPlayer.getVolume();
+        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.getVolume();
     }
-
-    @Override
-    public void play(int PlayListPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void stop() {
         mediaPlayer.stop();
     }
-
+    
     @Override
     public void pause() {
         mediaPlayer.pause();
@@ -78,22 +88,22 @@ public class InternetRadio implements IPlayer {
 
     @Override
     public void seekForward() {
-       //
+       //not supported for streaming
     }
 
     @Override
     public void seekBackward() {
-      //
+      //not supported for streaming
     }
 
     @Override
-    public void stepNext() {
-       play();
+    public void stepNextTrack() {
+       play(1);
     }
 
     @Override
-    public void stepBack() {
-        //
+    public void stepBackTrack() {
+         play(-1);
     }
 
     @Override
@@ -102,25 +112,30 @@ public class InternetRadio implements IPlayer {
     }
 
     @Override
-    public void setPlayList(PlayList PList) {
+    public void addPlayList(PlayList PList) {
         currentPlayList=PList;
     }
 
     @Override
     public PlayerInfo getPlayerInfo() {
-        return currentTrack;
+        return currentTrackInfo;
     }
 
     @Override
     public void increaseVolume(int Step) {
         mediaPlayer.setVolume(mediaPlayer.getVolume()+Step);
-         currentTrack.CurrentVolumeLevel=mediaPlayer.getVolume();
+         currentTrackInfo.CurrentVolumeLevel=mediaPlayer.getVolume();
     }
 
     @Override
     public void decreaseVolime(int Step) {
         mediaPlayer.setVolume(mediaPlayer.getVolume()-Step);
-        currentTrack.CurrentVolumeLevel=mediaPlayer.getVolume();
+        currentTrackInfo.CurrentVolumeLevel=mediaPlayer.getVolume();
+    }
+
+    @Override
+    public void setActivePlayList(String PlayListID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

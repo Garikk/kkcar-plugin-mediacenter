@@ -12,18 +12,19 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
  * @author blinov_is
  */
 public interface IPlayer {
-    void play();
-    void play(int PlayListPosition);
+    void play(int step);
+    void playPlayListItem(int PlayListPosition);
     void stop();
     void pause();
     void resume();
     void seekForward();
     void seekBackward();
-    void stepNext();
-    void stepBack();
+    void stepNextTrack();
+    void stepBackTrack();
     void shuffle();
     
-    void setPlayList(PlayList PList);
+    void addPlayList(PlayList PList);
+    void setActivePlayList(String PlayListID);
     
     void increaseVolume(int Step);
     void decreaseVolime(int Step);
