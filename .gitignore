@@ -1,0 +1,3 @@
+/target/classes/kkdev/kksystem/plugin/mediacenter/players/*.class
+/target/classes/kkdev/kksystem/plugin/mediacenter/manager/*.class
+/target/classes/kkdev/kksystem/plugin/mediacenter/configuration/*.class
