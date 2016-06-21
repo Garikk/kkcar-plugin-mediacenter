@@ -5,6 +5,8 @@
  */
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
+import java.util.List;
+import java.util.Map;
 import kkdev.kksystem.base.constants.SystemConsts;
 
 /**
@@ -21,8 +23,11 @@ public class MediaCenterConf {
     }
     
     
-   public PlayList[] playLists;
-   public MediaProcessor[] activeProcessors;
+   public List<PlayList> playLists;
+   public List<MediaProcessor> mediaProcessors;
+   public Map<MediaProcessor,PlayList> activePList;
+   
+   
    public ControlCommands commandsAssigment;
    
    public MediaProcessor activePlayer;

@@ -7,6 +7,8 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
+import kkdev.kksystem.base.classes.controls.PinControlData;
 import kkdev.kksystem.base.classes.display.pages.DisplayPage;
 import kkdev.kksystem.base.classes.display.pages.UIFrameData;
 import kkdev.kksystem.base.classes.display.pages.UIFramePack;
@@ -35,15 +37,15 @@ public abstract class kk_DefaultConfig {
         //
      ControlCommands CCmd=new ControlCommands();
      CCmd.controlsAssigment=new HashMap<>();
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, "VU");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, "VD");
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, PinControlData.DEF_BTN_VOL_INC);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, PinControlData.DEF_BTN_VOL_DEC);
      
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, "CUSTOM_CHR_1");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, "CUSTOM_CHR_2");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, "CUSTOM_CHR_3");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, "CUSTOM_CHR_4");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, "CUSTOM_CHR_5");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, "CUSTOM_CHR_6");
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, PinControlData.DEF_BTN_PLAY);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, PinControlData.DEF_BTN_STOP);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, PinControlData.DEF_BTN_NEXT_TRACK);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, PinControlData.DEF_BTN_PREV_TRACK);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, PinControlData.DEF_BTN_SEEK_RW);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, PinControlData.DEF_BTN_SEEK_FF);
   
      
      CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_1, "CUSTOM_CHR_TRK_1");
@@ -55,28 +57,31 @@ public abstract class kk_DefaultConfig {
      
      DefConf.commandsAssigment=CCmd;
      DefConf.activePlayer=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
-     DefConf.activeProcessors=new MediaProcessor[1];
-     DefConf.activeProcessors[0]=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
-     
-     DefConf.playLists=new PlayList[2];
-     PlayList PL = new PlayList();
-     PL.mediaType=PlayList.MediaSourceType.INTERNET_RADIO;
-  
-     PlayListEntry PLE=new PlayListEntry();
-     PLE.Title="Radio Record";
-     PLE.SourceAddr="http://air.radiorecord.ru/rr_128";
-     PL.addTrack(PLE);
-     
-     PLE=new PlayListEntry();
-     PLE.Title="Dance Wave";
-     PLE.SourceAddr="http://stream.dancewave.online:8080/dance.mp3";
-    PL.addTrack(PLE);
-     
-             
+        DefConf.mediaProcessors = new ArrayList<>();
+        DefConf.mediaProcessors.add(MediaProcessor.INTERNET_RADIO);
+
+        PlayList PL = new PlayList();
+        PL.mediaType = PlayList.MediaSourceType.INTERNET_RADIO;
+
+        PlayListEntry PLE = new PlayListEntry();
+        PLE.Title = "Radio Record";
+        PLE.SourceAddr = "http://air.radiorecord.ru/rr_128";
+        PL.addTrack(PLE);
+
+        PLE = new PlayListEntry();
+        PLE.Title = "Dance Wave";
+        PLE.SourceAddr = "http://stream.dancewave.online:8080/dance.mp3";
+        PL.addTrack(PLE);
+
+        DefConf.activePList=new TreeMap<>();
+        DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL);
+        DefConf.playLists.add(PL);
         
-       return DefConf;
+        
+
+        return DefConf;
     }
-    
+
     public static void addDefaultSystemUIPages(IKKControllerUtils Utils) {
         DisplayPage DP;
         UIFramePack[] FramePack;

@@ -6,6 +6,7 @@
 package kkdev.kksystem.plugin.mediacenter.configuration;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -13,7 +14,8 @@ import java.util.ArrayList;
  */
 public class PlayList {
 
-    private int CurrentPosition;
+    public String PlayListID;
+    public int CurrentPosition;
 
     public enum MediaSourceType {
         INTERNET_RADIO,
@@ -22,52 +24,52 @@ public class PlayList {
         BLUETOOTH
     }
     public MediaSourceType mediaType;
-
-    ArrayList<PlayListEntry> playListEntrys;
+    public ArrayList<PlayListEntry> playListEntries;
 
     public PlayList() {
-        playListEntrys = new ArrayList<>();
+        PlayListID=UUID.randomUUID().toString();
+        playListEntries = new ArrayList<>();
         CurrentPosition = 0;
     }
 
     public void addTrack(PlayListEntry PLE) {
-        playListEntrys.add(PLE);
+        playListEntries.add(PLE);
     }
 
     public PlayListEntry getCurrentTrack() {
-        return playListEntrys.get(CurrentPosition);
+        return playListEntries.get(CurrentPosition);
 
     }
 
     public PlayListEntry getNextTrack() {
-        if (playListEntrys.size() == CurrentPosition) {
+        if (playListEntries.size() == CurrentPosition) {
             CurrentPosition = 0;
         } else {
             CurrentPosition++;
         }
-        return playListEntrys.get(CurrentPosition);
+        return playListEntries.get(CurrentPosition);
 
     }
 
     public PlayListEntry getPrevTrack() {
         if (CurrentPosition == 0) {
-            CurrentPosition = playListEntrys.size();
+            CurrentPosition = playListEntries.size();
         } else {
             CurrentPosition--;
         }
-        return playListEntrys.get(CurrentPosition);
+        return playListEntries.get(CurrentPosition);
 
     }
 
     public PlayListEntry getTrack(int position) {
 
-        if (playListEntrys.size() < CurrentPosition) {
-            CurrentPosition = playListEntrys.size();
+        if (playListEntries.size() < CurrentPosition) {
+            CurrentPosition = playListEntries.size();
         } else {
             CurrentPosition = position;
         }
 
-        return playListEntrys.get(CurrentPosition);
+        return playListEntries.get(CurrentPosition);
 
     }
 }

@@ -134,7 +134,17 @@ public class InternetRadio implements IPlayer {
     }
 
     @Override
-    public void setActivePlayList(String PlayListID) {
+    public void setActivePlayList(String playListID) {
+        currentPlayList = PlayLists.get(playListID);
+    }
+
+    @Override
+    public void stepNextPlist() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void stepPrevPlist() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

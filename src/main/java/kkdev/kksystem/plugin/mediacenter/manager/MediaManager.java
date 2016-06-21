@@ -42,6 +42,7 @@ public class MediaManager extends PluginManagerBase {
         Players = new HashMap<>();
         MDisplay = new MediaDisplay(BaseConnector.GetUtils(), connector);
         initProcessors();
+        initPlaylists();
     }
 
     public void start() {
@@ -52,7 +53,7 @@ public class MediaManager extends PluginManagerBase {
 
     private void initProcessors() {
         CurrentMediaProcessor = PluginSettings.mainConfiguration.activePlayer;
-        for (MediaProcessor MP : PluginSettings.mainConfiguration.activeProcessors) {
+        for (MediaProcessor MP : PluginSettings.mainConfiguration.mediaProcessors) {
             switch (MP) {
                 case INTERNET_RADIO:
                     Players.put(MP, new InternetRadio());
@@ -73,6 +74,11 @@ public class MediaManager extends PluginManagerBase {
     private void initPlaylists() {
         for (PlayList PL : PluginSettings.mainConfiguration.playLists) {
             Players.get(getMediaProcessorForMediaType(PL.mediaType)).addPlayList(PL);
+        }
+        //
+        for (MediaProcessor MP:PluginSettings.mainConfiguration.activePList.keySet())
+        {
+            Players.get(MP).setActivePlayList(PluginSettings.mainConfiguration.activePList.get(MP));
         }
     }
 
@@ -116,23 +122,35 @@ public class MediaManager extends PluginManagerBase {
         }
     });
 
-    private void setPlaylist(IPlayer Player, PlayList PL)
-    {
+    private void setPlaylist(IPlayer Player, PlayList PL) {
         Player.addPlayList(PL);
     }
 
     private void processControlCommand(PinControlData PC) {
-        for (String Ctl : PC.controlID) {
-            if (Ctl.equals(PinControlData.DEF_BTN_VOL_INC)) {
-                Players.get(CurrentMediaProcessor).increaseVolume(5);
-            } else if (Ctl.equals(PinControlData.DEF_BTN_VOL_DEC)) {
-                Players.get(CurrentMediaProcessor).decreaseVolime(5);
-            } else if (Ctl.equals(PinControlData.DEF_BTN_NEXT_TRACK)) {
-                Players.get(CurrentMediaProcessor).stepNextTrack();
-            } else if (Ctl.equals(PinControlData.DEF_BTN_PREV_TRACK)) {
-                Players.get(CurrentMediaProcessor).stepBackTrack();
+        PC.controlID.stream().forEach((Ctl) -> {
+            switch (Ctl) {
+                case PinControlData.DEF_BTN_VOL_INC:
+                    Players.get(CurrentMediaProcessor).increaseVolume(5);
+                    break;
+                case PinControlData.DEF_BTN_VOL_DEC:
+                    Players.get(CurrentMediaProcessor).decreaseVolime(5);
+                    break;
+                case PinControlData.DEF_BTN_NEXT_TRACK:
+                    Players.get(CurrentMediaProcessor).stepNextTrack();
+                    break;
+                case PinControlData.DEF_BTN_PREV_TRACK:
+                    Players.get(CurrentMediaProcessor).stepBackTrack();
+                    break;
+                case PinControlData.DEF_BTN_NEXT_PLIST:
+                    Players.get(CurrentMediaProcessor).stepBackTrack();
+                    break;
+                case PinControlData.DEF_BTN_PREV_PLIST:
+                    Players.get(CurrentMediaProcessor).stepBackTrack();
+                    break;
+                default:
+                    break;
             }
-        }
+        });
 
     }
 }

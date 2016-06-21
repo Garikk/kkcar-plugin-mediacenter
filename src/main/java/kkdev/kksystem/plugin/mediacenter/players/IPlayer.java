@@ -21,6 +21,8 @@ public interface IPlayer {
     void seekBackward();
     void stepNextTrack();
     void stepBackTrack();
+    void stepNextPlist();
+    void stepPrevPlist();
     void shuffle();
     
     void addPlayList(PlayList PList);
