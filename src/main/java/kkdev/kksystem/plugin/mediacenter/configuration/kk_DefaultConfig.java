@@ -74,7 +74,7 @@ public abstract class kk_DefaultConfig {
         PL.addTrack(PLE);
 
         DefConf.activePList=new TreeMap<>();
-        DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL);
+        DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL.PlayListID);
         DefConf.playLists.add(PL);
         
         

@@ -25,7 +25,7 @@ public class MediaCenterConf {
     
    public List<PlayList> playLists;
    public List<MediaProcessor> mediaProcessors;
-   public Map<MediaProcessor,PlayList> activePList;
+   public Map<MediaProcessor,String> activePList;
    
    
    public ControlCommands commandsAssigment;
