@@ -1,3 +1,9 @@
 /target/classes/kkdev/kksystem/plugin/mediacenter/players/*.class
 /target/classes/kkdev/kksystem/plugin/mediacenter/manager/*.class
 /target/classes/kkdev/kksystem/plugin/mediacenter/configuration/*.class
+/target/*.jar
+/target/classes/*.netbeans_automatic_build
+/target/classes/kkdev/kksystem/plugin/mediacenter/manager/mediadisplay/*.class
+/target/lib/*.jar
+/target/test-classes/*.netbeans_automatic_build
+/target/classes
