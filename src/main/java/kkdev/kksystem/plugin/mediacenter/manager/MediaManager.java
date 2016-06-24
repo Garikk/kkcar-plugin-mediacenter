@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kkdev.kksystem.base.classes.controls.PinControlData;
+import kkdev.kksystem.base.classes.controls.PinDataControl;
 import kkdev.kksystem.base.classes.plugins.PluginMessage;
 import kkdev.kksystem.base.classes.plugins.simple.managers.PluginManagerBase;
 import static kkdev.kksystem.base.constants.PluginConsts.KK_PLUGIN_BASE_CONTROL_DATA;
@@ -99,9 +99,9 @@ public class MediaManager extends PluginManagerBase {
     }
 
     public void receivePin(PluginMessage PM) {
-        switch (PM.PinName) {
+        switch (PM.pinName) {
             case KK_PLUGIN_BASE_CONTROL_DATA:
-                processControlCommand((PinControlData) PM.PinData);
+                processControlCommand((PinDataControl) PM.getPinData());
                 break;
         }
     }
@@ -126,25 +126,25 @@ public class MediaManager extends PluginManagerBase {
         Player.addPlayList(PL);
     }
 
-    private void processControlCommand(PinControlData PC) {
+    private void processControlCommand(PinDataControl PC) {
         PC.controlID.stream().forEach((Ctl) -> {
             switch (Ctl) {
-                case PinControlData.DEF_BTN_VOL_INC:
+                case PinDataControl.DEF_BTN_VOL_INC:
                     Players.get(CurrentMediaProcessor).increaseVolume(5);
                     break;
-                case PinControlData.DEF_BTN_VOL_DEC:
+                case PinDataControl.DEF_BTN_VOL_DEC:
                     Players.get(CurrentMediaProcessor).decreaseVolime(5);
                     break;
-                case PinControlData.DEF_BTN_NEXT_TRACK:
+                case PinDataControl.DEF_BTN_NEXT_TRACK:
                     Players.get(CurrentMediaProcessor).stepNextTrack();
                     break;
-                case PinControlData.DEF_BTN_PREV_TRACK:
+                case PinDataControl.DEF_BTN_PREV_TRACK:
                     Players.get(CurrentMediaProcessor).stepBackTrack();
                     break;
-                case PinControlData.DEF_BTN_NEXT_PLIST:
+                case PinDataControl.DEF_BTN_NEXT_PLIST:
                     Players.get(CurrentMediaProcessor).stepBackTrack();
                     break;
-                case PinControlData.DEF_BTN_PREV_PLIST:
+                case PinDataControl.DEF_BTN_PREV_PLIST:
                     Players.get(CurrentMediaProcessor).stepBackTrack();
                     break;
                 default:

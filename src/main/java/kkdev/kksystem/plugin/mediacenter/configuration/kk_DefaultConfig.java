@@ -8,7 +8,7 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
-import kkdev.kksystem.base.classes.controls.PinControlData;
+import kkdev.kksystem.base.classes.controls.PinDataControl;
 import kkdev.kksystem.base.classes.display.pages.DisplayPage;
 import kkdev.kksystem.base.classes.display.pages.UIFrameData;
 import kkdev.kksystem.base.classes.display.pages.UIFramePack;
@@ -37,15 +37,15 @@ public abstract class kk_DefaultConfig {
         //
      ControlCommands CCmd=new ControlCommands();
      CCmd.controlsAssigment=new HashMap<>();
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, PinControlData.DEF_BTN_VOL_INC);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, PinControlData.DEF_BTN_VOL_DEC);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, PinDataControl.DEF_BTN_VOL_INC);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, PinDataControl.DEF_BTN_VOL_DEC);
      
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, PinControlData.DEF_BTN_PLAY);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, PinControlData.DEF_BTN_STOP);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, PinControlData.DEF_BTN_NEXT_TRACK);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, PinControlData.DEF_BTN_PREV_TRACK);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, PinControlData.DEF_BTN_SEEK_RW);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, PinControlData.DEF_BTN_SEEK_FF);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, PinDataControl.DEF_BTN_PLAY);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, PinDataControl.DEF_BTN_STOP);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, PinDataControl.DEF_BTN_NEXT_TRACK);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, PinDataControl.DEF_BTN_PREV_TRACK);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, PinDataControl.DEF_BTN_SEEK_RW);
+     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, PinDataControl.DEF_BTN_SEEK_FF);
   
      
      CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_1, "CUSTOM_CHR_TRK_1");
