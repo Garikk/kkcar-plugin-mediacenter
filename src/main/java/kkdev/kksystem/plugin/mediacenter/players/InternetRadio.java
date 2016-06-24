@@ -6,6 +6,7 @@
 package kkdev.kksystem.plugin.mediacenter.players;
 
 import java.util.Map;
+import java.util.TreeMap;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayListEntry;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
@@ -41,6 +42,7 @@ public class InternetRadio implements IPlayer {
     }
     
     public InternetRadio(){
+        PlayLists=new TreeMap<>();
         currentTrackInfo=new PlayerInfo();
         currentTrackInfo.PlayerName="Internet Radio";
         currentTrackInfo.TitleArtist="===";
@@ -114,6 +116,7 @@ public class InternetRadio implements IPlayer {
     @Override
     public void addPlayList(PlayList PList) {
         currentPlayList=PList;
+        PlayLists.put(PList.PlayListID, PList);
     }
 
     @Override

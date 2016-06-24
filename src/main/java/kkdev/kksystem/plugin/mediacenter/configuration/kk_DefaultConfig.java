@@ -18,15 +18,13 @@ import kkdev.kksystem.base.interfaces.IKKControllerUtils;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
 import static kkdev.kksystem.plugin.mediacenter.manager.mediadisplay.MediaDisplay.MEDIACENTER_PAGE;
 
-
 /**
  *
  * @author blinov_is
  *
  * Creating default config
  *
- * Default configuration for mediacenter
- * MUST BE CHANGED IN PRODUCTION
+ * Default configuration for mediacenter MUST BE CHANGED IN PRODUCTION
  *
  */
 public abstract class kk_DefaultConfig {
@@ -35,28 +33,26 @@ public abstract class kk_DefaultConfig {
 
         MediaCenterConf DefConf = new MediaCenterConf();
         //
-     ControlCommands CCmd=new ControlCommands();
-     CCmd.controlsAssigment=new HashMap<>();
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, PinDataControl.DEF_BTN_VOL_INC);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, PinDataControl.DEF_BTN_VOL_DEC);
-     
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, PinDataControl.DEF_BTN_PLAY);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, PinDataControl.DEF_BTN_STOP);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, PinDataControl.DEF_BTN_NEXT_TRACK);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, PinDataControl.DEF_BTN_PREV_TRACK);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, PinDataControl.DEF_BTN_SEEK_RW);
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, PinDataControl.DEF_BTN_SEEK_FF);
-  
-     
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_1, "CUSTOM_CHR_TRK_1");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_2, "CUSTOM_CHR_TRK_2");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_3, "CUSTOM_CHR_TRK_3");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_4, "CUSTOM_CHR_TRK_4");
-     CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_5, "CUSTOM_CHR_TRK_5");
-     
-     
-     DefConf.commandsAssigment=CCmd;
-     DefConf.activePlayer=MediaCenterConf.MediaProcessor.INTERNET_RADIO;
+        ControlCommands CCmd = new ControlCommands();
+        CCmd.controlsAssigment = new HashMap<>();
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLUP, PinDataControl.DEF_BTN_VOL_INC);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_VOLDOWN, PinDataControl.DEF_BTN_VOL_DEC);
+
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PLAY, PinDataControl.DEF_BTN_PLAY);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_STOP, PinDataControl.DEF_BTN_STOP);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_NEXT, PinDataControl.DEF_BTN_NEXT_TRACK);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_BACK, PinDataControl.DEF_BTN_PREV_TRACK);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKBWD, PinDataControl.DEF_BTN_SEEK_RW);
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_SEEKFWD, PinDataControl.DEF_BTN_SEEK_FF);
+
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_1, "CUSTOM_CHR_TRK_1");
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_2, "CUSTOM_CHR_TRK_2");
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_3, "CUSTOM_CHR_TRK_3");
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_4, "CUSTOM_CHR_TRK_4");
+        CCmd.controlsAssigment.put(ControlCommands.ControlCommandTypes.CMD_PRESET_5, "CUSTOM_CHR_TRK_5");
+
+        DefConf.commandsAssigment = CCmd;
+        DefConf.activePlayer = MediaCenterConf.MediaProcessor.INTERNET_RADIO;
         DefConf.mediaProcessors = new ArrayList<>();
         DefConf.mediaProcessors.add(MediaProcessor.INTERNET_RADIO);
 
@@ -73,11 +69,10 @@ public abstract class kk_DefaultConfig {
         PLE.SourceAddr = "http://stream.dancewave.online:8080/dance.mp3";
         PL.addTrack(PLE);
 
-        DefConf.activePList=new TreeMap<>();
+        DefConf.activePList = new TreeMap<>();
         DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL.PlayListID);
+        DefConf.playLists=new ArrayList<>();
         DefConf.playLists.add(PL);
-        
-        
 
         return DefConf;
     }
@@ -101,7 +96,6 @@ public abstract class kk_DefaultConfig {
         //
         Utils.DISPLAY_AddUIDisplayPage(DP);
         //
-      
 
     }
 
@@ -115,7 +109,7 @@ public abstract class kk_DefaultConfig {
 
         Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n \r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n \r\n[MP_TRACKTIME]\r\n[VOL_LEVEL]";
         Ret[0].data[0].fontSize = 2;
-        
+
         //
         return Ret;
 
