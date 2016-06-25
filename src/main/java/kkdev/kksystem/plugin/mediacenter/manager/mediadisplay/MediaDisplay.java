@@ -29,10 +29,10 @@ public class MediaDisplay {
     public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector) {
         kk_DefaultConfig.addDefaultSystemUIPages(Utils);
         CurrentDisplayInfo = new framesKeySet();
-        CurrentDisplayInfo.setValue("[MP_PLAYERTYPE]", "Dingo Media");
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE]", "Loading");
-        CurrentDisplayInfo.setValue("[MP_TRACKTITLE_2]", "Wait");
-        CurrentDisplayInfo.setValue("[MP_TRACKTIME]", "Wait");
+        CurrentDisplayInfo.setValue("MP_PLAYERTYPE", "Dingo Media");
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE", "Loading");
+        CurrentDisplayInfo.setValue("MP_TRACKTITLE_2", "Wait");
+        CurrentDisplayInfo.setValue("MP_TRACKTIME", "Wait");
     }
 
     IPageMakerExecCommand PageExec = new IPageMakerExecCommand() {
