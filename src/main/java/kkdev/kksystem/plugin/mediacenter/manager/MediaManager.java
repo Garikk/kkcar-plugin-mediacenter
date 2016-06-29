@@ -35,12 +35,12 @@ public class MediaManager extends PluginManagerBase {
     private Map<MediaProcessor, IPlayer> Players;
     private MediaDisplay MDisplay;
 
-    public void init(KKPlugin BaseConnector) {
-        connector = BaseConnector;
-        PluginSettings.initConfig(BaseConnector.globalConfID, BaseConnector.pluginInfo.getPluginInfo().PluginUUID);
+    public void init(KKPlugin PluginConnector) {
+        setPluginConnector(PluginConnector);
+        PluginSettings.initConfig(PluginConnector.globalConfID, PluginConnector.pluginInfo.getPluginInfo().PluginUUID);
         this.currentFeature.put(SystemConsts.KK_BASE_UICONTEXT_DEFAULT, PluginSettings.mainConfiguration.featureID);
         Players = new HashMap<>();
-        MDisplay = new MediaDisplay(BaseConnector.GetUtils(), connector);
+        MDisplay = new MediaDisplay(PluginConnector.GetUtils(), PluginConnector);
         initProcessors();
         initPlaylists();
     }

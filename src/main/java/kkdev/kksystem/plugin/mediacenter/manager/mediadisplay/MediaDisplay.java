@@ -48,7 +48,7 @@ public class MediaDisplay {
     };
 
     public void showMediaDisplay() {
-        pageManager = new PageMaker(Global.MD.currentFeature.get(SystemConsts.KK_BASE_UICONTEXT_DEFAULT), SystemConsts.KK_BASE_UICONTEXT_DEFAULT, Global.MD.connector, PageExec);
+        pageManager = new PageMaker(Global.MD.currentFeature.get(SystemConsts.KK_BASE_UICONTEXT_DEFAULT), SystemConsts.KK_BASE_UICONTEXT_DEFAULT, Global.MD.getPluginConnector(), PageExec);
         MKPageItem[] Page;
         Page = new MKPageItem[1];
         Page[0] = new MKPageItem();
