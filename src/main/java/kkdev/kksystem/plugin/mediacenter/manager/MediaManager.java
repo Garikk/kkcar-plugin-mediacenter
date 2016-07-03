@@ -101,7 +101,8 @@ public class MediaManager extends PluginManagerBase {
     public void receivePin(PluginMessage PM) {
         switch (PM.pinName) {
             case KK_PLUGIN_BASE_CONTROL_DATA:
-                processControlCommand((PinDataControl) PM.getPinData());
+                if (PM.FeatureID.contains(PluginSettings.mainConfiguration.featureID))
+                    processControlCommand((PinDataControl) PM.getPinData());
                 break;
         }
     }
