@@ -121,6 +121,8 @@ public class InternetRadio implements IPlayer {
 
     @Override
     public PlayerInfo getPlayerInfo() {
+        currentTrackInfo.isPlaying=mediaPlayer.isPlaying();
+        currentTrackInfo.TitleDescription=mediaPlayer.getMediaMetaData().getTitle();
         return currentTrackInfo;
     }
 

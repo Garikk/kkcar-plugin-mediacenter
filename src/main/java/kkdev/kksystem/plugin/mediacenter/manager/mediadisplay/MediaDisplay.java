@@ -33,6 +33,7 @@ public class MediaDisplay {
         CurrentDisplayInfo.setValue("MP_TRACKTITLE", "Loading");
         CurrentDisplayInfo.setValue("MP_TRACKTITLE_2", "Wait");
         CurrentDisplayInfo.setValue("MP_TRACKTIME", "Wait");
+        CurrentDisplayInfo.setValue("MP_PLAYERSTATE", "Stop");
     }
 
     IPageMakerExecCommand PageExec = new IPageMakerExecCommand() {
@@ -59,17 +60,20 @@ public class MediaDisplay {
         pageManager.showInfoPage();
     }
 
-    public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime, Integer VolumeLevel) {
+    public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime, Integer VolumeLevel,String PlayerState) {
         CurrentDisplayInfo.setValue("MP_PLAYERTYPE", PlayerName);
         CurrentDisplayInfo.setValue("MP_TRACKTITLE", TrackInfo);
         CurrentDisplayInfo.setValue("MP_TRACKTITLE_2", TrackInfo2);
         CurrentDisplayInfo.setValue("MP_TRACKTIME", TrackTime);
-        CurrentDisplayInfo.setValue("VOL_LEVEL", VolumeLevel.toString());
+        CurrentDisplayInfo.setValue("MP_VOL_LEVEL", VolumeLevel.toString());
+        CurrentDisplayInfo.setValue("MP_PLAYERSTATE", PlayerState);
         //
         pageManager.updatePageFrames(MEDIACENTER_PAGE, CurrentDisplayInfo);
     }
      public void updateCurrentDisplayInfo(PlayerInfo Info) {
-        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel);
+         String PlayerState;
+         PlayerState=Info.isPlaying ? "Playing" : "Stop";
+        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel,PlayerState);
     }
    
 

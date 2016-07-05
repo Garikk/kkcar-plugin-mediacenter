@@ -61,7 +61,7 @@ public abstract class kk_DefaultConfig {
 
         PlayListEntry PLE = new PlayListEntry();
         PLE.Title = "Radio Record";
-        PLE.SourceAddr = "http://air.radiorecord.ru/rr_128";
+        PLE.SourceAddr = "http://air.radiorecord.ru:8102/brks_128";
         PL.addTrack(PLE);
 
         PLE = new PlayListEntry();
@@ -107,7 +107,7 @@ public abstract class kk_DefaultConfig {
         Ret[0].data = new UIFrameData[1];
         Ret[0].data[0] = new UIFrameData();
 
-        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n \r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n \r\n[MP_TRACKTIME]\r\n[VOL_LEVEL]";
+        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n \r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n \r\n[MP_TRACKTIME]\r\n[MP_PLAYERSTATE]\r\n[MP_VOL_LEVEL]";
         Ret[0].data[0].fontSize = 2;
 
         //
