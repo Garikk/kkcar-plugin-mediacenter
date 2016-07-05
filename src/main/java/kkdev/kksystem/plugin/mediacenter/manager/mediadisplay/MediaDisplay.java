@@ -5,6 +5,7 @@
  */
 package kkdev.kksystem.plugin.mediacenter.manager.mediadisplay;
 
+import kkdev.kksystem.base.classes.controls.PinDataControl;
 import kkdev.kksystem.base.classes.display.pages.framesKeySet;
 import kkdev.kksystem.base.classes.display.tools.infopage.MKPageItem;
 import kkdev.kksystem.base.classes.display.tools.infopage.PageMaker;
@@ -14,6 +15,7 @@ import kkdev.kksystem.base.interfaces.IKKControllerUtils;
 import kkdev.kksystem.base.interfaces.IPluginKKConnector;
 import kkdev.kksystem.plugin.mediacenter.Global;
 import kkdev.kksystem.plugin.mediacenter.configuration.kk_DefaultConfig;
+import kkdev.kksystem.plugin.mediacenter.players.IPlayer;
 import kkdev.kksystem.plugin.mediacenter.players.PlayerInfo;
 
 /**
@@ -25,8 +27,10 @@ public class MediaDisplay {
     public final static String MEDIACENTER_PAGE = "MEDIAPLAYER";
     PageMaker pageManager;
     framesKeySet CurrentDisplayInfo;
+    IPlayer PlayerManager;
 
-    public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector) {
+    public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector, IPlayer Callback) {
+        PlayerManager=Callback;
         kk_DefaultConfig.addDefaultSystemUIPages(Utils);
         CurrentDisplayInfo = new framesKeySet();
         CurrentDisplayInfo.setValue("MP_PLAYERTYPE", "Dingo Media");
@@ -39,12 +43,31 @@ public class MediaDisplay {
     IPageMakerExecCommand PageExec = new IPageMakerExecCommand() {
         @Override
         public void execCommand(String PageCMD) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            
+            String[] CMD = PageCMD.split(" ");
+
+            if (CMD[0].equals("PLAYER")) {
+                if (CMD[1].equals("STOPSTART"))
+                    PlayerManager.stopstart();
+            }
+
         }
 
         @Override
         public void pageSelected(String PageName) {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void pageStepFwd() {
+            System.out.println("CMD F");
+            PlayerManager.stepNextTrack();
+        }
+
+        @Override
+        public void pageStepBwd() {
+            System.out.println("CMD B");
+            PlayerManager.stepBackTrack();
         }
     };
 
@@ -58,6 +81,7 @@ public class MediaDisplay {
         Page[0].pageFrames = CurrentDisplayInfo;
         pageManager.addPages(Page);
         pageManager.showInfoPage();
+        
     }
 
     public void updateCurrentDisplayInfo(String PlayerName,String TrackInfo, String TrackInfo2, String TrackTime, Integer VolumeLevel,String PlayerState) {
@@ -74,6 +98,10 @@ public class MediaDisplay {
          String PlayerState;
          PlayerState=Info.isPlaying ? "Playing" : "Stop";
         updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel,PlayerState);
+    }
+
+    public void processControlCommand(PinDataControl PC) {
+        pageManager.processControlCommand(PC.controlID);
     }
    
 

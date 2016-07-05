@@ -12,6 +12,7 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
  * @author blinov_is
  */
 public interface IPlayer {
+    void stopstart();
     void play(int step);
     void playPlayListItem(int PlayListPosition);
     void stop();

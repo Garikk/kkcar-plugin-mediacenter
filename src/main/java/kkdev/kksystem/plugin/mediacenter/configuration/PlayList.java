@@ -42,7 +42,7 @@ public class PlayList {
     }
 
     public PlayListEntry getNextTrack() {
-        if (playListEntries.size() == CurrentPosition) {
+        if ((playListEntries.size()-1) == CurrentPosition) {
             CurrentPosition = 0;
         } else {
             CurrentPosition++;
@@ -53,7 +53,7 @@ public class PlayList {
 
     public PlayListEntry getPrevTrack() {
         if (CurrentPosition == 0) {
-            CurrentPosition = playListEntries.size();
+            CurrentPosition = (playListEntries.size()-1);
         } else {
             CurrentPosition--;
         }
@@ -64,7 +64,7 @@ public class PlayList {
     public PlayListEntry getTrack(int position) {
 
         if (playListEntries.size() < CurrentPosition) {
-            CurrentPosition = playListEntries.size();
+            CurrentPosition = (playListEntries.size()-1);
         } else {
             CurrentPosition = position;
         }

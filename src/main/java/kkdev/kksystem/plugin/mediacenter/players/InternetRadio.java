@@ -153,4 +153,12 @@ public class InternetRadio implements IPlayer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void stopstart() {
+        if (currentTrackInfo.isPlaying)
+            stop();
+        else
+            play(0);
+    }
+
 }
