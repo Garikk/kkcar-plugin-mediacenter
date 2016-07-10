@@ -65,9 +65,15 @@ public abstract class kk_DefaultConfig {
         PL.addTrack(PLE);
 
         PLE = new PlayListEntry();
-        PLE.Title = "Dance Wave";
-        PLE.SourceAddr = "http://stream.dancewave.online:8080/dance.mp3";
+        PLE.Title = " BlackBeats.FM";
+        PLE.SourceAddr = "http://46.165.232.55:80";
         PL.addTrack(PLE);
+        
+         PLE = new PlayListEntry();
+        PLE.Title = " The RnB Channel";
+        PLE.SourceAddr = "http://192.99.8.192:3132/stream";
+        PL.addTrack(PLE);
+
 
         DefConf.activePList = new TreeMap<>();
         DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL.PlayListID);
@@ -107,7 +113,7 @@ public abstract class kk_DefaultConfig {
         Ret[0].data = new UIFrameData[1];
         Ret[0].data[0] = new UIFrameData();
 
-        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n \r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n \r\n[MP_TRACKTIME]\r\n[MP_PLAYERSTATE]\r\n[MP_VOL_LEVEL]";
+        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n[MP_TRACKTIME]\r\n[MP_PLAYERSTATE] Vol.[MP_VOL_LEVEL]";
         Ret[0].data[0].fontSize = 2;
 
         //
