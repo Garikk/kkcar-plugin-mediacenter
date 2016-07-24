@@ -73,7 +73,11 @@ public abstract class kk_DefaultConfig {
         PLE.Title = " The RnB Channel";
         PLE.SourceAddr = "http://192.99.8.192:3132/stream";
         PL.addTrack(PLE);
-
+        
+         PLE = new PlayListEntry();
+        PLE.Title = "Radio WAWA";
+        PLE.SourceAddr = "http://waw04.ic1.scdn.smcloud.net/t050-1.mp3";
+        PL.addTrack(PLE);
 
         DefConf.activePList = new TreeMap<>();
         DefConf.activePList.put(MediaProcessor.INTERNET_RADIO, PL.PlayListID);
