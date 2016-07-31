@@ -6,7 +6,9 @@
 package kkdev.kksystem.plugin.mediacenter.manager;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kkdev.kksystem.base.classes.controls.PinDataControl;
@@ -35,11 +37,13 @@ public class MediaManager extends PluginManagerBase {
     private MediaProcessor CurrentMediaProcessor;
     private Map<MediaProcessor, IPlayer> Players;
     private MediaDisplay MDisplay;
+    private Queue<PinDataControl> ControlDataQueue;
     
 
 
     public void init(KKPlugin PluginConnector) {
         setPluginConnector(PluginConnector);
+        ControlDataQueue = new LinkedList<>();
         PluginSettings.initConfig(PluginConnector.globalConfID, PluginConnector.pluginInfo.getPluginInfo().PluginUUID);
         this.currentFeature.put(SystemConsts.KK_BASE_UICONTEXT_DEFAULT, PluginSettings.mainConfiguration.featureID);
         Players = new HashMap<>();
@@ -114,13 +118,13 @@ public class MediaManager extends PluginManagerBase {
             IPlayer CheckPlayer;
             while (true) {
                 try {
-                    Thread.sleep(900);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MediaManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 CheckPlayer = Players.get(CurrentMediaProcessor);
                 MDisplay.updateCurrentDisplayInfo(CheckPlayer.getPlayerInfo());
-
+ processControl();
             }
         }
     });
@@ -131,14 +135,26 @@ public class MediaManager extends PluginManagerBase {
 
     private void processControlCommand(PinDataControl PC) {
        MDisplay.processControlCommand(PC);
-       
+       //
+      ControlDataQueue.add(PC);
+       //
+    }
+    
+    private void processControl()
+    {
+        if (ControlDataQueue.isEmpty())
+            return;
+            
+        while (ControlDataQueue.size()>0)
+        {
+            PinDataControl PC=ControlDataQueue.poll();
         PC.controlID.stream().forEach((Ctl) -> {
             switch (Ctl) {
                 case PinDataControl.DEF_BTN_VOL_INC:
-                    Players.get(CurrentMediaProcessor).increaseVolume(5);
+                    Players.get(CurrentMediaProcessor).increaseVolume(1);
                     break;
                 case PinDataControl.DEF_BTN_VOL_DEC:
-                    Players.get(CurrentMediaProcessor).decreaseVolime(5);
+                    Players.get(CurrentMediaProcessor).decreaseVolime(1);
                     break;
                 case PinDataControl.DEF_BTN_NEXT_TRACK:
                     Players.get(CurrentMediaProcessor).stepNextTrack();
@@ -165,6 +181,7 @@ public class MediaManager extends PluginManagerBase {
                     break;
             }
         });
+        }
 
     }
         private IPlayer MenuCallback=new IPlayer(){

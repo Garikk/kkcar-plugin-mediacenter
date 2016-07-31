@@ -117,7 +117,7 @@ public abstract class kk_DefaultConfig {
         Ret[0].data = new UIFrameData[1];
         Ret[0].data[0] = new UIFrameData();
 
-        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n[MP_TRACKTIME]\r\n[MP_PLAYERSTATE] Vol.[MP_VOL_LEVEL]";
+        Ret[0].data[0].frameData = "[MP_PLAYERTYPE]\r\n[MP_TRACKTITLE]\r\n[MP_TRACKTITLE_2]\r\n[MP_TRACKTIME]\r\n[MP_PLAYERSTATE] V.[MP_VOL_LEVEL]";
         Ret[0].data[0].fontSize = 2;
 
         //
