@@ -28,6 +28,7 @@ public class MediaDisplay {
     PageMaker pageManager;
     framesKeySet CurrentDisplayInfo;
     IPlayer PlayerManager;
+    PlayerInfo PI;
 
     public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector, IPlayer Callback) {
         PlayerManager=Callback;
@@ -95,9 +96,10 @@ public class MediaDisplay {
         pageManager.updatePageFrames(MEDIACENTER_PAGE, CurrentDisplayInfo);
     }
      public void updateCurrentDisplayInfo(PlayerInfo Info) {
-         String PlayerState;
-         PlayerState=Info.isPlaying ? "Playing" : "Stop";
-        updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel,PlayerState);
+        if (!PI.equals(Info))
+            updateCurrentDisplayInfo(Info.PlayerName,Info.TitleArtist,Info.TitleDescription,Info.TrackTimeLine,Info.CurrentVolumeLevel,Info.isPlaying ? "Playing" : "Stop");
+        //
+        PI=Info;
     }
 
     public void processControlCommand(PinDataControl PC) {

@@ -113,18 +113,19 @@ public class MediaManager extends PluginManagerBase {
         }
     }
     Thread UpdateDisplay = new Thread(new Runnable() {
+        
         @Override
         public void run() {
-            IPlayer CheckPlayer;
+            IPlayer CheckPlayer=null;
+            MediaProcessor MPC=null;
             while (true) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MediaManager.class.getName()).log(Level.SEVERE, null, ex);
+                Thread.yield();
+                if (MPC!=CurrentMediaProcessor){
+                    CheckPlayer = Players.get(CurrentMediaProcessor);
+                    MPC=CurrentMediaProcessor;
                 }
-                CheckPlayer = Players.get(CurrentMediaProcessor);
                 MDisplay.updateCurrentDisplayInfo(CheckPlayer.getPlayerInfo());
- processControl();
+                processControl();
             }
         }
     });
@@ -134,7 +135,7 @@ public class MediaManager extends PluginManagerBase {
     }
 
     private void processControlCommand(PinDataControl PC) {
-       MDisplay.processControlCommand(PC);
+        MDisplay.processControlCommand(PC);
        //
       ControlDataQueue.add(PC);
        //

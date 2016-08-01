@@ -18,4 +18,7 @@ public class PlayerInfo {
     public boolean isPlaying;
     
     public int CurrentVolumeLevel;
+    
+    
+    
 }
