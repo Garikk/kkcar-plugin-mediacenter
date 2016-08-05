@@ -7,13 +7,14 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
 
 import java.util.List;
 import java.util.Map;
+import kkdev.kksystem.base.classes.plugins.PluginConfiguration;
 import kkdev.kksystem.base.constants.SystemConsts;
 
 /**
  *
  * @author blinov_is
  */
-public class MediaCenterConf {
+public class MediaCenterConf extends PluginConfiguration {
     public enum MediaProcessor
     {
         INTERNET_RADIO,

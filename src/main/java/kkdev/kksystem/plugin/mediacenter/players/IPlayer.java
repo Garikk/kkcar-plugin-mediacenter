@@ -29,8 +29,8 @@ public interface IPlayer {
     void addPlayList(PlayList PList);
     void setActivePlayList(String PlayListID);
     
-    void increaseVolume(int Step);
-    void decreaseVolime(int Step);
+    int increaseVolume(int Step);
+    int decreaseVolime(int Step);
     
     PlayerInfo getPlayerInfo();
     

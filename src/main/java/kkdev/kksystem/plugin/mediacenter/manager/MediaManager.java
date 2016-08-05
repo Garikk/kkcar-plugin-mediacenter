@@ -20,6 +20,7 @@ import kkdev.kksystem.plugin.mediacenter.KKPlugin;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PluginSettings;
+import kkdev.kksystem.plugin.mediacenter.configuration.QuickParameterTypes;
 import kkdev.kksystem.plugin.mediacenter.manager.mediadisplay.MediaDisplay;
 import kkdev.kksystem.plugin.mediacenter.players.Bluetooth;
 import kkdev.kksystem.plugin.mediacenter.players.FilesystemPlayer;
@@ -146,16 +147,17 @@ public class MediaManager extends PluginManagerBase {
         if (ControlDataQueue.isEmpty())
             return;
             
-        while (ControlDataQueue.size()>0)
-        {
-            PinDataControl PC=ControlDataQueue.poll();
-        PC.controlID.stream().forEach((Ctl) -> {
-            switch (Ctl) {
-                case PinDataControl.DEF_BTN_VOL_INC:
-                    Players.get(CurrentMediaProcessor).increaseVolume(1);
-                    break;
-                case PinDataControl.DEF_BTN_VOL_DEC:
-                    Players.get(CurrentMediaProcessor).decreaseVolime(1);
+        while (ControlDataQueue.size() > 0) {
+            PinDataControl PC = ControlDataQueue.poll();
+            PC.controlID.stream().forEach((Ctl) -> {
+                switch (Ctl) {
+                    case PinDataControl.DEF_BTN_VOL_INC:
+                        int currVolumeI = Players.get(CurrentMediaProcessor).increaseVolume(1);
+                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), currVolume);
+                        break;
+                    case PinDataControl.DEF_BTN_VOL_DEC:
+                        int currVolumeD = Players.get(CurrentMediaProcessor).decreaseVolime(1);
+                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), currVolume);
                     break;
                 case PinDataControl.DEF_BTN_NEXT_TRACK:
                     Players.get(CurrentMediaProcessor).stepNextTrack();
