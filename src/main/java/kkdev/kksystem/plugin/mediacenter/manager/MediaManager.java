@@ -39,8 +39,6 @@ public class MediaManager extends PluginManagerBase {
     private Map<MediaProcessor, IPlayer> Players;
     private MediaDisplay MDisplay;
     private Queue<PinDataControl> ControlDataQueue;
-    
-
 
     public void init(KKPlugin PluginConnector) {
         setPluginConnector(PluginConnector);
@@ -48,7 +46,7 @@ public class MediaManager extends PluginManagerBase {
         PluginSettings.initConfig(PluginConnector.globalConfID, PluginConnector.pluginInfo.getPluginInfo().PluginUUID);
         this.currentFeature.put(SystemConsts.KK_BASE_UICONTEXT_DEFAULT, PluginSettings.mainConfiguration.featureID);
         Players = new HashMap<>();
-        MDisplay = new MediaDisplay(PluginConnector.GetUtils(), PluginConnector,MenuCallback);
+        MDisplay = new MediaDisplay(PluginConnector.GetUtils(), PluginConnector, MenuCallback);
         initProcessors();
         initPlaylists();
     }
@@ -101,29 +99,30 @@ public class MediaManager extends PluginManagerBase {
                 return MediaProcessor.RADIO;
         }
         //
-        
+
         return null;
     }
 
     public void receivePin(PluginMessage PM) {
         switch (PM.pinName) {
             case KK_PLUGIN_BASE_CONTROL_DATA:
-                if (PM.FeatureID.contains(PluginSettings.mainConfiguration.featureID))
+                if (PM.FeatureID.contains(PluginSettings.mainConfiguration.featureID)) {
                     processControlCommand((PinDataControl) PM.getPinData());
+                }
                 break;
         }
     }
     Thread UpdateDisplay = new Thread(new Runnable() {
-        
+
         @Override
         public void run() {
-            IPlayer CheckPlayer=null;
-            MediaProcessor MPC=null;
+            IPlayer CheckPlayer = null;
+            MediaProcessor MPC = null;
             while (true) {
                 Thread.yield();
-                if (MPC!=CurrentMediaProcessor){
+                if (MPC != CurrentMediaProcessor) {
                     CheckPlayer = Players.get(CurrentMediaProcessor);
-                    MPC=CurrentMediaProcessor;
+                    MPC = CurrentMediaProcessor;
                 }
                 MDisplay.updateCurrentDisplayInfo(CheckPlayer.getPlayerInfo());
                 processControl();
@@ -137,79 +136,78 @@ public class MediaManager extends PluginManagerBase {
 
     private void processControlCommand(PinDataControl PC) {
         MDisplay.processControlCommand(PC);
-       //
-      ControlDataQueue.add(PC);
-       //
+        //
+        ControlDataQueue.add(PC);
+        //
     }
-    
-    private void processControl()
-    {
-        if (ControlDataQueue.isEmpty())
+
+    private void processControl() {
+        if (ControlDataQueue.isEmpty()) {
             return;
-            
+        }
+
         while (ControlDataQueue.size() > 0) {
             PinDataControl PC = ControlDataQueue.poll();
             PC.controlID.stream().forEach((Ctl) -> {
                 switch (Ctl) {
                     case PinDataControl.DEF_BTN_VOL_INC:
-                        int currVolumeI = Players.get(CurrentMediaProcessor).increaseVolume(1);
-                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), currVolume);
+                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), Players.get(CurrentMediaProcessor).increaseVolume(1));
                         break;
                     case PinDataControl.DEF_BTN_VOL_DEC:
-                        int currVolumeD = Players.get(CurrentMediaProcessor).decreaseVolime(1);
-                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), currVolume);
-                    break;
-                case PinDataControl.DEF_BTN_NEXT_TRACK:
-                    Players.get(CurrentMediaProcessor).stepNextTrack();
-                    break;
-                case PinDataControl.DEF_BTN_PREV_TRACK:
-                    Players.get(CurrentMediaProcessor).stepBackTrack();
-                    break;
-                case PinDataControl.DEF_BTN_NEXT_PLIST:
-                    Players.get(CurrentMediaProcessor).stepNextPlist();
-                    break;
-                case PinDataControl.DEF_BTN_PREV_PLIST:
-                    Players.get(CurrentMediaProcessor).stepPrevPlist();
-                    break;
-                case PinDataControl.DEF_BTN_PLAY:
-                    Players.get(CurrentMediaProcessor).play(0);
-                    break;
-                case PinDataControl.DEF_BTN_STOP:
-                    Players.get(CurrentMediaProcessor).stop();
-                    break;
-                case PinDataControl.DEF_BTN_PAUSE:
-                    Players.get(CurrentMediaProcessor).pause();
-                    break;
-                default:
-                    break;
-            }
-        });
+                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), Players.get(CurrentMediaProcessor).decreaseVolime(1));
+                        break;
+                    case PinDataControl.DEF_BTN_NEXT_TRACK:
+                         PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).stepNextTrack());
+                        break;
+                    case PinDataControl.DEF_BTN_PREV_TRACK:
+                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).stepBackTrack());
+                        break;
+                    case PinDataControl.DEF_BTN_NEXT_PLIST:
+                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_PLAYLISTID.getValue(),Players.get(CurrentMediaProcessor).stepNextPlist());
+                        break;
+                    case PinDataControl.DEF_BTN_PREV_PLIST:
+                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_PLAYLISTID.getValue(),Players.get(CurrentMediaProcessor).stepPrevPlist());
+                        break;
+                    case PinDataControl.DEF_BTN_PLAY:
+                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).play(0));
+                        break;
+                    case PinDataControl.DEF_BTN_STOP:
+                        Players.get(CurrentMediaProcessor).stop();
+                        break;
+                    case PinDataControl.DEF_BTN_PAUSE:
+                        Players.get(CurrentMediaProcessor).pause();
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
-
     }
-        private IPlayer MenuCallback=new IPlayer(){
+
+    private IPlayer MenuCallback = new IPlayer() {
         @Override
         public void stopstart() {
-                Players.get(CurrentMediaProcessor).stopstart();
-        }
-        @Override
-        public void play(int step) {
-                Players.get(CurrentMediaProcessor).play(step);
+            Players.get(CurrentMediaProcessor).stopstart();
         }
 
         @Override
-        public void playPlayListItem(int PlayListPosition) {
+        public String play(int step) {
+            return Players.get(CurrentMediaProcessor).play(step);
+        }
+
+        @Override
+        public String playPlayListItem(int PlayListPosition) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void stop() {
-           Players.get(CurrentMediaProcessor).stop();
+            Players.get(CurrentMediaProcessor).stop();
         }
 
         @Override
         public void pause() {
-              Players.get(CurrentMediaProcessor).pause();
+            Players.get(CurrentMediaProcessor).pause();
         }
 
         @Override
@@ -228,23 +226,23 @@ public class MediaManager extends PluginManagerBase {
         }
 
         @Override
-        public void stepNextTrack() {
-            Players.get(CurrentMediaProcessor).stepNextTrack();
+        public String stepNextTrack() {
+            return Players.get(CurrentMediaProcessor).stepNextTrack();
         }
 
         @Override
-        public void stepBackTrack() {
-            Players.get(CurrentMediaProcessor).stepBackTrack();
+        public String stepBackTrack() {
+            return Players.get(CurrentMediaProcessor).stepBackTrack();
         }
 
         @Override
-        public void stepNextPlist() {
-            Players.get(CurrentMediaProcessor).stepNextPlist();
+        public String stepNextPlist() {
+            return Players.get(CurrentMediaProcessor).stepNextPlist();
         }
 
         @Override
-        public void stepPrevPlist() {
-            Players.get(CurrentMediaProcessor).stepPrevPlist();
+        public String stepPrevPlist() {
+            return Players.get(CurrentMediaProcessor).stepPrevPlist();
         }
 
         @Override
@@ -263,17 +261,17 @@ public class MediaManager extends PluginManagerBase {
         }
 
         @Override
-        public void increaseVolume(int Step) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        public void decreaseVolime(int Step) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
         public PlayerInfo getPlayerInfo() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int increaseVolume(int Step) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int decreaseVolime(int Step) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     };

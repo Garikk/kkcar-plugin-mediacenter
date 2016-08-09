@@ -16,7 +16,7 @@ public class FilesystemPlayer implements IPlayer{
 
 
     @Override
-    public void play(int PlayListPosition) {
+    public String play(int PlayListPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -46,12 +46,12 @@ public class FilesystemPlayer implements IPlayer{
     }
 
     @Override
-    public void stepNextTrack() {
+    public String stepNextTrack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void stepBackTrack() {
+    public String stepBackTrack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -70,18 +70,9 @@ public class FilesystemPlayer implements IPlayer{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void increaseVolume(int Step) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
-    public void decreaseVolime(int Step) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void playPlayListItem(int PlayListPosition) {
+    public String playPlayListItem(int PlayListPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -91,17 +82,27 @@ public class FilesystemPlayer implements IPlayer{
     }
 
     @Override
-    public void stepNextPlist() {
+    public String stepNextPlist() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void stepPrevPlist() {
+    public String stepPrevPlist() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void stopstart() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int increaseVolume(int Step) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int decreaseVolime(int Step) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

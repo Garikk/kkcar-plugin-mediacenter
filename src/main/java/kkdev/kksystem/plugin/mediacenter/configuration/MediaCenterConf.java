@@ -34,4 +34,8 @@ public class MediaCenterConf extends PluginConfiguration {
    public MediaProcessor activePlayer;
    
    public String featureID=SystemConsts.KK_BASE_FEATURES_MEDIAPLAYER_UID;
+   
+   
+   
+   
 }

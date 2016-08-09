@@ -10,10 +10,8 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
  * @author blinov_is
  */
 public enum QuickParameterTypes {
-    INT_MAIN_VOLUME("VOL")
-    ,
-    BOOL_PLAYER_STOP("PLAYERSTOP")
-    ,
+    INT_MAIN_VOLUME("VOL"),
+    BOOL_PLAYER_STOP("PLAYERSTOP"),
     STRING_PLAYER_PLAYLISTID("PLAYLIST_ID"),
     STRING_PLAYER_TRACKID("TRACK_ID"),
     BOOLEAN_PLAYER_AUTOPLAY("AUTOPLAY");
@@ -23,9 +21,19 @@ public enum QuickParameterTypes {
     QuickParameterTypes(String myVal) {
         myValue = myVal;
     }
-    public String getVal()
+    public String getValue()
     {
         return myValue;
     }
+     public static QuickParameterTypes fromString(String text) {
+    if (text != null) {
+      for (QuickParameterTypes b : QuickParameterTypes.values()) {
+        if (text.equalsIgnoreCase(b.myValue)) {
+          return b;
+        }
+      }
+    }
+    return null;
+  }
 
 }

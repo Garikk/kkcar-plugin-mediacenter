@@ -13,17 +13,17 @@ import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
  */
 public interface IPlayer {
     void stopstart();
-    void play(int step);
-    void playPlayListItem(int PlayListPosition);
+    String play(int step);
+    String playPlayListItem(int PlayListPosition);
     void stop();
     void pause();
     void resume();
     void seekForward();
     void seekBackward();
-    void stepNextTrack();
-    void stepBackTrack();
-    void stepNextPlist();
-    void stepPrevPlist();
+    String stepNextTrack();
+    String stepBackTrack();
+    String stepNextPlist();
+    String stepPrevPlist();
     void shuffle();
     
     void addPlayList(PlayList PList);

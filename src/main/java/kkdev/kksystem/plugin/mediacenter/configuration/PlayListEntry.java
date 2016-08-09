@@ -11,6 +11,7 @@ package kkdev.kksystem.plugin.mediacenter.configuration;
  */
     public class PlayListEntry {
 
+       public String PlayListEntryID; 
        public String Title;
        public String SourceAddr;
         
