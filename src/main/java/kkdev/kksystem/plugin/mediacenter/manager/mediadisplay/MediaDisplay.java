@@ -11,12 +11,12 @@ import kkdev.kksystem.base.classes.display.tools.infopage.MKPageItem;
 import kkdev.kksystem.base.classes.display.tools.infopage.PageMaker;
 import kkdev.kksystem.base.classes.display.tools.infopage.PageMaker.IPageMakerExecCommand;
 import kkdev.kksystem.base.constants.SystemConsts;
-import kkdev.kksystem.base.interfaces.IKKControllerUtils;
-import kkdev.kksystem.base.interfaces.IPluginKKConnector;
 import kkdev.kksystem.plugin.mediacenter.Global;
 import kkdev.kksystem.plugin.mediacenter.configuration.kk_DefaultConfig;
 import kkdev.kksystem.plugin.mediacenter.players.IPlayer;
 import kkdev.kksystem.plugin.mediacenter.players.PlayerInfo;
+import kkdev.kksystem.base.interfaces.IPluginConnection;
+import kkdev.kksystem.base.interfaces.IControllerUtils;
 
 /**
  *
@@ -30,7 +30,7 @@ public class MediaDisplay {
     IPlayer PlayerManager;
     PlayerInfo PI;
 
-    public MediaDisplay(IKKControllerUtils Utils, IPluginKKConnector BaseConnector, IPlayer Callback) {
+    public MediaDisplay(IControllerUtils Utils, IPluginConnection BaseConnector, IPlayer Callback) {
         PlayerManager=Callback;
         kk_DefaultConfig.addDefaultSystemUIPages(Utils);
         CurrentDisplayInfo = new framesKeySet();
