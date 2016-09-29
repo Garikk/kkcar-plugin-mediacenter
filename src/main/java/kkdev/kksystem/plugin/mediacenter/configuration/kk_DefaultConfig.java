@@ -104,7 +104,7 @@ public abstract class kk_DefaultConfig {
         DP.isMultifeaturePage = true;
         DP.framesPack = FramePack[0];
         //
-        Utils.DISPLAY_AddUIDisplayPage(DP);
+        Utils.DisplayFunctions().AddUIDisplayPage(DP);
         //
 
     }
