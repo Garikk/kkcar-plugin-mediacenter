@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import kkdev.kksystem.base.classes.controls.PinDataControl;
 import kkdev.kksystem.base.classes.plugins.PluginMessage;
 import kkdev.kksystem.base.classes.plugins.simple.managers.PluginManagerBase;
@@ -20,7 +18,6 @@ import kkdev.kksystem.plugin.mediacenter.KKPlugin;
 import kkdev.kksystem.plugin.mediacenter.configuration.MediaCenterConf.MediaProcessor;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PluginSettings;
-import kkdev.kksystem.plugin.mediacenter.configuration.QuickParameterTypes;
 import kkdev.kksystem.plugin.mediacenter.manager.mediadisplay.MediaDisplay;
 import kkdev.kksystem.plugin.mediacenter.players.Bluetooth;
 import kkdev.kksystem.plugin.mediacenter.players.FilesystemPlayer;
@@ -151,25 +148,25 @@ public class MediaManager extends PluginManagerBase {
             PC.controlID.stream().forEach((Ctl) -> {
                 switch (Ctl) {
                     case PinDataControl.DEF_BTN_VOL_INC:
-                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), Players.get(CurrentMediaProcessor).increaseVolume(1));
+                        PluginSettings.mainConfiguration.savedVolumeLevel=Players.get(CurrentMediaProcessor).increaseVolume(1);
                         break;
                     case PinDataControl.DEF_BTN_VOL_DEC:
-                        PluginSettings.mainConfiguration.setParameterInteger(QuickParameterTypes.INT_MAIN_VOLUME.getValue(), Players.get(CurrentMediaProcessor).decreaseVolime(1));
+                        PluginSettings.mainConfiguration.savedVolumeLevel=Players.get(CurrentMediaProcessor).decreaseVolume(1);
                         break;
                     case PinDataControl.DEF_BTN_NEXT_TRACK:
-                         PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).stepNextTrack());
+                        PluginSettings.mainConfiguration.savedTrackId=Players.get(CurrentMediaProcessor).stepNextTrack();
                         break;
                     case PinDataControl.DEF_BTN_PREV_TRACK:
-                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).stepBackTrack());
+                        PluginSettings.mainConfiguration.savedTrackId=Players.get(CurrentMediaProcessor).stepBackTrack();
                         break;
                     case PinDataControl.DEF_BTN_NEXT_PLIST:
-                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_PLAYLISTID.getValue(),Players.get(CurrentMediaProcessor).stepNextPlist());
+                        PluginSettings.mainConfiguration.savedTrackId=Players.get(CurrentMediaProcessor).stepNextPlist();
                         break;
                     case PinDataControl.DEF_BTN_PREV_PLIST:
-                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_PLAYLISTID.getValue(),Players.get(CurrentMediaProcessor).stepPrevPlist());
+                        PluginSettings.mainConfiguration.savedTrackId=Players.get(CurrentMediaProcessor).stepPrevPlist();
                         break;
                     case PinDataControl.DEF_BTN_PLAY:
-                        PluginSettings.mainConfiguration.setParameterString(QuickParameterTypes.STRING_PLAYER_TRACKID.getValue(),Players.get(CurrentMediaProcessor).play(0));
+                        PluginSettings.mainConfiguration.savedTrackId=Players.get(CurrentMediaProcessor).play(0);
                         break;
                     case PinDataControl.DEF_BTN_STOP:
                         Players.get(CurrentMediaProcessor).stop();
@@ -271,7 +268,7 @@ public class MediaManager extends PluginManagerBase {
         }
 
         @Override
-        public int decreaseVolime(int Step) {
+        public int decreaseVolume(int Step) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     };

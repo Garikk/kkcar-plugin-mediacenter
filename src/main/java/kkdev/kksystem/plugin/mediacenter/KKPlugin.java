@@ -1,10 +1,12 @@
 package kkdev.kksystem.plugin.mediacenter;
 
+import kkdev.kksystem.base.classes.plugins.PluginConfiguration;
 import kkdev.kksystem.base.classes.plugins.PluginMessage;
 import kkdev.kksystem.base.classes.plugins.simple.KKPluginBase;
 import kkdev.kksystem.plugin.mediacenter.manager.MediaManager;
 import kkdev.kksystem.base.interfaces.IPluginBaseConnection;
 import kkdev.kksystem.base.interfaces.IControllerUtils;
+import kkdev.kksystem.plugin.mediacenter.configuration.PluginSettings;
 
 
 /**
@@ -43,5 +45,8 @@ public final class KKPlugin extends KKPluginBase {
     public IControllerUtils GetUtils() {
         return SysUtils;
     }
-
+ @Override
+    public PluginConfiguration getPluginSettings() {
+       return PluginSettings.mainConfiguration;
+    }
 }

@@ -30,7 +30,7 @@ public interface IPlayer {
     void setActivePlayList(String PlayListID);
     
     int increaseVolume(int Step);
-    int decreaseVolime(int Step);
+    int decreaseVolume(int Step);
     
     PlayerInfo getPlayerInfo();
     

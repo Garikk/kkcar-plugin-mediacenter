@@ -138,7 +138,7 @@ public class InternetRadio implements IPlayer {
     }
 
     @Override
-    public int decreaseVolime(int Step) {
+    public int decreaseVolume(int Step) {
         mediaPlayer.setVolume(mediaPlayer.getVolume() - Step);
         currentTrackInfo.CurrentVolumeLevel = mediaPlayer.getVolume();
         return currentTrackInfo.CurrentVolumeLevel;

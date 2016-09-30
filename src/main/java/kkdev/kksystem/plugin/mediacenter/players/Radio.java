@@ -76,7 +76,7 @@ public class Radio implements IPlayer{
     }
 
     @Override
-    public int decreaseVolime(int Step) {
+    public int decreaseVolume(int Step) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
