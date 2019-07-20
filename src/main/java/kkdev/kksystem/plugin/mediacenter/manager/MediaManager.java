@@ -75,13 +75,9 @@ public class MediaManager extends PluginManagerBase {
     }
 
     private void initPlaylists() {
-        PluginSettings.mainConfiguration.playLists.stream().forEach((PL) -> {
-            Players.get(getMediaProcessorForMediaType(PL.mediaType)).addPlayList(PL);
-        });
+        PluginSettings.mainConfiguration.playLists.stream().forEach((PL) -> Players.get(getMediaProcessorForMediaType(PL.mediaType)).addPlayList(PL));
         //
-        PluginSettings.mainConfiguration.activePList.keySet().stream().forEach((MP) -> {
-            Players.get(MP).setActivePlayList(PluginSettings.mainConfiguration.activePList.get(MP));
-        });
+        PluginSettings.mainConfiguration.activePList.keySet().stream().forEach((MP) -> Players.get(MP).setActivePlayList(PluginSettings.mainConfiguration.activePList.get(MP)));
     }
 
     private MediaProcessor getMediaProcessorForMediaType(PlayList.MediaSourceType MST) {
