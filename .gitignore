@@ -7,3 +7,4 @@
 /target/lib/*.jar
 /target/test-classes/*.netbeans_automatic_build
 /target/classes
+/nb-configuration.xml
