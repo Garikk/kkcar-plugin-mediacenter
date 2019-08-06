@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayList;
 import kkdev.kksystem.plugin.mediacenter.configuration.PlayListEntry;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 /**
@@ -39,7 +39,7 @@ public class InternetRadio implements IPlayer {
     private EmbeddedMediaPlayer createPlayer() {
         EmbeddedMediaPlayer headlessMediaPlayer;
         MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(VLC_ARGS);
-        headlessMediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+        headlessMediaPlayer = mediaPlayerFactory.mediaPlayers().newEmbeddedMediaPlayer();
         return headlessMediaPlayer;
     }
 
@@ -72,19 +72,19 @@ public class InternetRadio implements IPlayer {
     private String playPLItem(PlayListEntry PLE) {
         currentTrackInfo.TitleArtist = PLE.Title;
         currentTrackInfo.TitleDescription = PLE.OnlineTrackInfoArtist;
-        mediaPlayer.playMedia(PLE.SourceAddr);
-        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.getVolume();
+        mediaPlayer.media().play(PLE.SourceAddr);
+        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.audio().volume();
         return PLE.PlayListEntryID;
     }
 
     @Override
     public void stop() {
-        mediaPlayer.stop();
+        mediaPlayer.controls().stop();
     }
 
     @Override
     public void pause() {
-        mediaPlayer.pause();
+        mediaPlayer.controls().pause();
     }
 
     @Override
@@ -125,22 +125,23 @@ public class InternetRadio implements IPlayer {
 
     @Override
     public PlayerInfo getPlayerInfo() {
-        currentTrackInfo.isPlaying = mediaPlayer.isPlaying();
-        currentTrackInfo.TitleDescription = mediaPlayer.getMediaMetaData().getTitle();
+        currentTrackInfo.isPlaying = mediaPlayer.status().isPlaying();
+        //currentTrackInfo.TitleDescription = mediaPlayer.titles().titleDescriptions().get(0);
         return currentTrackInfo;
     }
 
     @Override
     public int increaseVolume(int Step) {
-        mediaPlayer.setVolume(mediaPlayer.getVolume() + Step);
-        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.getVolume();
+        
+        mediaPlayer.audio().setVolume(mediaPlayer.audio().volume() + Step);
+        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.audio().volume();
         return currentTrackInfo.CurrentVolumeLevel;
     }
 
     @Override
     public int decreaseVolume(int Step) {
-        mediaPlayer.setVolume(mediaPlayer.getVolume() - Step);
-        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.getVolume();
+        mediaPlayer.audio().setVolume(mediaPlayer.audio().volume() - Step);
+        currentTrackInfo.CurrentVolumeLevel = mediaPlayer.audio().volume();
         return currentTrackInfo.CurrentVolumeLevel;
     }
 
